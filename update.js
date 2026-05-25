@@ -22,32 +22,31 @@ html = html.replace(/Para quando ja nao tens paciencia para explicar o obvio\./g
 html = html.replace(/A versao mais discreta - mesma atitude, tamanho menor\./g, 'A versão mais discreta — mesma atitude, tamanho menor.');
 html = html.replace(/Forca e delicadeza na mesma peca\. Porque podes ser guerreira e poetica ao mesmo tempo\./g, 'Força e delicadeza na mesma peça. Porque podes ser guerreira e poética ao mesmo tempo.');
 html = html.replace(/Para a mulher que define os seus limites sem pedir desculpa\./g, 'Para a mulher que define os seus limites sem pedir desculpa.');
-html = html.replace(/✦ Envio gratis/g, '✦ Envio grátis');
 html = html.replace(/Criadas em Portugal, com atitude\. Porque uma mulher que sabe o que quer merece uma joia que o diga em voz alta\./g, 'Criadas em Portugal, com atitude. Porque uma mulher que sabe o que quer merece uma jóia que o diga em voz alta.');
 
-// 5 & 15. Replace taglines
+// Fix "Envio gratis" -> "Envio grátis" (multiple patterns)
+html = html.replace(/Envio gratis/g, 'Envio grátis');
+
+// 5 & 15. Replace taglines  
 html = html.replace(/joias com mensagem/gi, 'jóias com intenção');
 html = html.replace(/JOIAS COM MENSAGEM/g, 'JÓIAS COM INTENÇÃO');
 
 // 7. Replace flowers with moon/stars in success modal
 html = html.replace(/<div class="success-icon">[^<]*<\/div>/, '<div class="success-icon">✨🌙✨<\/div>');
 
-// 8. Fix Instagram link to direct messages in success modal
-html = html.replace(/(href=")(https:\/\/www\.instagram\.com\/by_luna_blossom\/)(")([^>]*>@by_luna_blossom<\/a><\/p>[\s\S]*?<\/div>[\s\S]*?<\/div>\s*<\/div>)/,
-  (match, p1, p2, p3, p4) => {
-    return p1 + 'https://ig.me/m/by_luna_blossom' + p3 + p4;
-  });
+// 8. Fix Instagram link to direct messages in success modal only
+html = html.replace(/(<div id="stepSuccess"[^>]*>[\s\S]*?href=")https:\/\/www\.instagram\.com\/by_luna_blossom\/(")/,
+  '$1https://ig.me/m/by_luna_blossom$2');
 
-// 9. Change email tagline
+// 9 & 10. Update email content - tagline under logo in email template
 html = html.replace(/joias com mensagem\./g, 'jóias com intenção.');
 
-// 10. Remove Sofia from footer  
-html = html.replace(/Com carinho, Sofia[^<]*/g, 'Com carinho,');
+// 10. Remove Sofia from footer email
+html = html.replace(/Com carinho, Sofia/g, 'Com carinho,');
 
-// 15. Update all mentions in footer
-html = html.replace(/· feitas em Portugal/g, '· feitas em Portugal');
+// Footer Instagram link - NOT changing the header/nav links to DMs, only stepSuccess
+// (the footer @by_luna_blossom link to profile is fine)
 
 console.log('All changes applied. Size:', html.length, 'bytes');
 fs.writeFileSync('index.html', html);
 console.log('File saved successfully!');
-
