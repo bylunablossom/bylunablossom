@@ -1,0 +1,15 @@
+name: Update Site
+on: {workflow_dispatch: {}}
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions: {contents: write}
+    steps:
+      - uses: actions/checkout@v4
+      - run: node update.js
+      - run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add index.html
+          git diff --staged --quiet || git commit -m "Update site content"
+          git push
