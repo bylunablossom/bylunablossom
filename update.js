@@ -3,47 +3,81 @@ let html = fs.readFileSync('index.html', 'utf8');
 
 // ── 1. Fix Instagram DM link ──
 html = html.replace(
-    'href="https://www.instagram.com/by_luna_blossom/"',
-    'href="https://ig.me/m/by_luna_blossom"'
-  );
+        'href="https://www.instagram.com/by_luna_blossom/"',
+        'href="https://ig.me/m/by_luna_blossom"'
+    );
 
-// ── 2. POPUP "Encomenda Recebida": substitui a flor rosa por lilas + adiciona logo sem fundo ──
+// ── 2. POPUP "Encomenda Recebida": sem flor, com logo sem fundo ──
 html = html.replace(
-    /<div class="modal-success" id="stepSuccess"[^>]*>[\s\S]*?<\/div>\s*<\/div>/,
-    `<div class="modal-success" id="stepSuccess" style="display:none">
-          <img src="logo-new.png" alt="by Luna Blossom" style="width:100px;margin:0 auto 0.5rem;display:block;">
-                <div class="success-icon" style="font-size:2.5rem;margin-bottom:0.5rem">🌸</div>
-                      <h3>Encomenda recebida!</h3>
-                            <p style="margin-top:1rem">Vais receber um email com os dados de pagamento em breve.<br>Qualquer d\u00favida fala connosco no <a href="https://ig.me/m/by_luna_blossom" target="_blank" style="color:var(--gold)">@by_luna_blossom</a></p>
-                                </div>`
-  );
+        /<div class="modal-success" id="stepSuccess"[^>]*>[\s\S]*?<\/div>\s*<\/div>/,
+        `<div class="modal-success" id="stepSuccess" style="display:none">
+                    <img src="logo-new.png" alt="by Luna Blossom" style="width:100px;margin:0 auto 0.5rem;display:block;">
+                                <h3>Encomenda recebida!</h3>
+                                            <p style="margin-top:1rem">Vais receber um email com os dados de pagamento em breve.<br>Qualquer d\u00favida fala connosco no <a href="https://ig.me/m/by_luna_blossom" target="_blank" style="color:var(--gold)">@by_luna_blossom</a></p>
+                                                    </div>`
+    );
 
-// Replace pink rose emoji with lilac flower emoji in success icon
-html = html.replace(
-    '<div class="success-icon" style="font-size:2.5rem;margin-bottom:0.5rem">\uD83C\uDF38</div>',
-    '<div class="success-icon" style="font-size:2.5rem;margin-bottom:0.5rem">\uD83D\uDC9C</div>'
-  );
+// Also remove any leftover flower emoji in the success icon (legacy)
+html = html.replace(/<div class="success-icon"[^>]*>[\s\S]*?<\/div>/, '');
 
-// ── 9 & 15. Email: muda tagline e frases ──
-// "joias com mensagem" -> "joias com intencao" in email body
-// "Cada joia e uma declaracao" - already correct in site
-// Change the email tagline below logo: "joias com mensagem" -> "Cada joia e uma declaracao"
-// Change footer: remove Sofia, change tagline
-
-// Fix email HTML - the Google Apps Script handles emails, so we update the template in the HTML
-// that gets sent via the script. The email HTML is built in the Google Apps Script (server side).
-// Here we update the submitEncomenda success message display and any client-side email references.
-
-// ── 10. Footer do email: remove "Sofia" ──
-// This is handled in the Google Apps Script
-
-// ── Fix "joias com mensagem" -> "joias com intencao" everywhere in page ──
+// ── 3. Fix "joias com mensagem" -> "joias com intencao" everywhere in page ──
 html = html.replace(/joias com mensagem/gi, 'j\u00f3ias com inten\u00e7\u00e3o');
 html = html.replace(/J\u00f3ias com mensagem/g, 'J\u00f3ias com inten\u00e7\u00e3o');
 html = html.replace(/JOIAS COM MENSAGEM/g, 'J\u00d3IAS COM INTEN\u00c7\u00c3O');
 
-// Count changes
-console.log('Done updating index.html');
+// ── 4. Politica de privacidade: adiciona checkbox antes do botao de submissao ──
+// Adiciona checkbox de politica de privacidade
+html = html.replace(
+        /(<button[^>]*id="btnSubmit"[^>]*>|<button[^>]*type="submit"[^>]*class="[^"]*btn-submit[^"]*"[^>]*>)/,
+        `<div style="margin:12px 0;font-size:13px;color:#555;">
+          <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;">
+              <input type="checkbox" id="privacyCheck" required style="margin-top:3px;accent-color:#C4963A;" />
+                  <span>Li e aceito a <a href="privacidade.html" target="_blank" style="color:#C4963A;text-decoration:underline;">Pol\u00edtica de Privacidade e Devolu\u00e7\u00f5es</a></span>
+                    </label>
+                    </div>
+                    $1`
+    );
+
+// ── 5. Cria pagina de politica de privacidade se nao existir ──
+const privacyHtml = `<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pol\u00edtica de Privacidade e Devolu\u00e7\u00f5es - by Luna Blossom</title>
+<style>
+  body { font-family: Georgia, serif; max-width: 680px; margin: 40px auto; padding: 20px; color: #333; line-height: 1.7; }
+    h1 { color: #1a2e1a; font-size: 1.4rem; border-bottom: 1px solid #C4963A; padding-bottom: 8px; }
+      h2 { color: #C4963A; font-size: 1rem; margin-top: 28px; }
+        a { color: #C4963A; }
+          footer { margin-top: 40px; font-size: 12px; color: #888; text-align: center; }
+          </style>
+          </head>
+          <body>
+          <h1>Pol\u00edtica de Privacidade e Devolu\u00e7\u00f5es</h1>
+          <p><em>by Luna Blossom</em></p>
+
+          <h2>1. Dados Pessoais</h2>
+          <p>Os teus dados pessoais (nome, email, morada e telefone) s\u00e3o recolhidos exclusivamente para o processamento e envio da tua encomenda. N\u00e3o s\u00e3o partilhados com terceiros para fins comerciais.</p>
+
+          <h2>2. Reten\u00e7\u00e3o de Dados</h2>
+          <p>Os teus dados ser\u00e3o eliminados ao fim de 6 meses ap\u00f3s a concretiza\u00e7\u00e3o da encomenda.</p>
+
+          <h2>3. Direitos do Utilizador</h2>
+          <p>Tens direito a aceder, corrigir ou solicitar a elimina\u00e7\u00e3o dos teus dados a qualquer momento, contactando-nos atrav\u00e9s do Instagram <a href="https://ig.me/m/by_luna_blossom" target="_blank">@by_luna_blossom</a>.</p>
+
+          <h2>4. Devolu\u00e7\u00f5es</h2>
+          <p>Dado o car\u00e1ter personalizado e artesanal das nossas pe\u00e7as, n\u00e3o aceitamos devolu\u00e7\u00f5es salvo em caso de defeito de fabrico. Em caso de produto com defeito, contacta-nos no prazo de 48h ap\u00f3s a recebi\u00e7\u00e3o da encomenda.</p>
+          <p>Os custos de devolu\u00e7\u00e3o s\u00e3o da responsabilidade do comprador.</p>
+
+          <h2>5. Contacto</h2>
+          <p>Para qualquer quest\u00e3o relacionada com a tua encomenda ou dados pessoais, fala connosco no Instagram: <a href="https://ig.me/m/by_luna_blossom" target="_blank">@by_luna_blossom</a></p>
+
+          <footer>&copy; by Luna Blossom &mdash; j\u00f3ias com inten\u00e7\u00e3o, feitas em Portugal</footer>
+          </body>
+          </html>`;
+
+fs.writeFileSync('privacidade.html', privacyHtml);
 
 fs.writeFileSync('index.html', html);
-console.log('Saved!');
+console.log('Done! index.html e privacidade.html actualizados.');
