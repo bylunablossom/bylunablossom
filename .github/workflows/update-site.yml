@@ -10,6 +10,6 @@ jobs:
       - run: |
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
-          git add index.html
+          git add index.html privacidade.html
           git diff --staged --quiet || git commit -m "Update site content"
           git push
