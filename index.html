@@ -207,11 +207,51 @@ footer a{color:var(--gold);text-decoration:none}
                     <img src="logo-new.png" alt="by Luna Blossom" style="width:100px;margin:0 auto 0.5rem;display:block;">
                                 <h3>Encomenda recebida!</h3>
                                             <p style="margin-top:1rem">Vais receber um email com os dados de pagamento em breve.<br>Qualquer dúvida fala connosco no <a href="https://ig.me/m/by_luna_blossom" target="_blank" style="color:var(--gold)">@by_luna_blossom</a></p>
-                                                    </div>'
-    +'<div class="card-footer">'
-    +'<div class="card-meta"><span class="card-price">16&#8364;</span><span class="card-ship">&#10022; Envio grátis</span></div>'
-    +'<button class="btn-add" onclick="addToCart('+i+')" id="btn-'+i+'">+ Adicionar</button>'
-    +'</div></div>';
+                                                    </div>
+</div>
+</div>
+
+<script>
+var SCRIPT_URL='https://script.google.com/macros/s/AKfycbzQ6SlYGHM5AUY3D7XHu5C97qiBGxGXqg8291DWiAtDWavhzrxNwc7MCHTVBFMLZw2zoQ/exec';
+var PRECO=16;
+var cart=[];
+var MEDALHAS=[
+  {img:'',nome:'No means No',desc:'Três palavras que toda a mulher já precisou de dizer. Usa ao pescoço e deixa a medalha falar por ti.',mm:'20mm'},
+  {img:'',nome:'Stop looking at my boobs',desc:'Sim, diz mesmo isso. Porque algumas mensagens precisam de ser ditas.',mm:'20mm'},
+  {img:'',nome:'Respect my space',desc:'O teu espaço é sagrado. Não tens de o explicar. Usa esta medalha e deixa que o mundo entenda.',mm:'20mm'},
+  {img:'',nome:'My body, my rules',desc:'O teu corpo. As tuas regras. Sem negociação, sem desculpas, sem explicações.',mm:'20mm'},
+  {img:'',nome:'Not your business',desc:'A tua vida, as tuas escolhas. Ponto final.',mm:'20mm'},
+  {img:'',nome:'I am not your toy',desc:'Para a mulher que sabe o seu valor e não aceita ser tratada como menos.',mm:'20mm'},
+  {img:'',nome:'Stay out of my lane',desc:'Foca-te na tua vida — a minha está muito bem tratada, obrigada.',mm:'20mm'},
+  {img:'',nome:'Feminist AF',desc:'Porque não há nada de radical em querer igualdade e respeito. Feita com amor. Usada com convicção.',mm:'20mm'},
+  {img:'',nome:'Mind your own damn business',desc:'Para a mulher que define os seus limites sem pedir desculpa.',mm:'20mm'},
+  {img:'',nome:'Hands off',desc:'O teu corpo, o teu espaço. Limites claros, sem margem para dúvidas.',mm:'20mm'},
+  {img:'',nome:'Keep your opinions to yourself',desc:'Não pediste a opinião de ninguém — e esta medalha garante que toda a gente sabe.',mm:'20mm'},
+  {img:'',nome:'Zero fucks given',desc:'Para a mulher que já percebeu que a opinião dos outros não vale o tempo.',mm:'20mm'},
+  {img:'',nome:'Bye, not sorry',desc:'Sair sem pedir desculpa. A declaração mais libertadora que podes usar ao pescoço.',mm:'20mm'},
+  {img:'',nome:'Fuck you',desc:'Para quando já não tens paciência para explicar o óbvio.',mm:'15mm'},
+  {img:'',nome:'Hand and Flower',desc:'Força e delicadeza na mesma peça. Porque podes ser guerreira e poética ao mesmo tempo.',mm:'15mm'}
+];
+var container=document.getElementById('cards');
+MEDALHAS.forEach(function(m,i){
+  var card=document.createElement('div');
+  card.className='card fade-in';
+  var imgHtml=m.img&&m.img.length>0?'<img class="card-img-wrap" src="'+m.img+'" alt="">':'<div class="card-img-wrap"><div class="card-img-placeholder">'+m.nome+'</div></div>';
+  card.innerHTML=imgHtml
+  +'<div class="card-body">'
+  +'<div class="card-size-tag">medalha · '+m.mm+'</div>'
+  +'<h3 class="card-name">'+m.nome+'</h3>'
+  +'<p class="card-desc">'+m.desc+'</p>'
+  +'<div class="color-selector">'
+  +'<span class="color-label">Cor da medalha</span>'
+  +'<div class="color-options">'
+  +'<button class="color-opt sel-gold" data-color="dourado" data-idx="'+i+'" onclick="selectColor(this)"><span class="dot dot-g"></span>Dourado</button>'
+  +'<button class="color-opt" data-color="prateado" data-idx="'+i+'" onclick="selectColor(this)"><span class="dot dot-s"></span>Prateado</button>'
+  +'</div></div>'
+  +'<div class="card-footer">'
+  +'<div class="card-meta"><span class="card-price">16&#8364;</span><span class="card-ship">&#10022; Envio grátis</span></div>'
+  +'<button class="btn-add" onclick="addToCart('+i+')" id="btn-'+i+'">+ Adicionar</button>'
+  +'</div></div>';
   container.appendChild(card);
 });
 
@@ -377,6 +417,7 @@ var obs=new IntersectionObserver(function(entries){
   entries.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add('visible');},i*60);});
 },{threshold:.1});
 document.querySelectorAll('.fade-in').forEach(function(el){obs.observe(el);});
+
 </script>
 </body>
 </html>
