@@ -3,19 +3,19 @@ let html = fs.readFileSync('index.html', 'utf8');
 
 // ── 1. Fix Instagram DM link ──
 html = html.replace(
-          'href="https://www.instagram.com/by_luna_blossom/"',
-          'href="https://ig.me/m/by_luna_blossom"'
-  );
+                  'href="https://www.instagram.com/by_luna_blossom/"',
+                  'href="https://ig.me/m/by_luna_blossom"'
+          );
 
 // ── 2. POPUP "Encomenda Recebida": sem flor, com logo sem fundo ──
 html = html.replace(
-          /<div class="modal-success" id="stepSuccess"[^>]*>[\s\S]*?<\/div>\s*<\/div>/,
-          `<div class="modal-success" id="stepSuccess" style="display:none">
-          <img src="logo-new.png" alt="by Luna Blossom" style="width:100px;margin:0 auto 0.5rem;display:block;">
-          <h3>Encomenda recebida!</h3>
-          <p style="margin-top:1rem">Vais receber um email com os dados de pagamento em breve.<br>Qualquer d\u00favida fala connosco no <a href="https://ig.me/m/by_luna_blossom" target="_blank" style="color:var(--gold)">@by_luna_blossom</a></p>
-          </div>`
-  );
+                  /<div class="modal-success" id="stepSuccess"[^>]*>[\s\S]*?<\/div>\s*<\/div>/,
+                  `<div class="modal-success" id="stepSuccess" style="display:none">
+                  <img src="logo-new.png" alt="by Luna Blossom" style="width:100px;margin:0 auto 0.5rem;display:block;">
+                  <h3>Encomenda recebida!</h3>
+                  <p style="margin-top:1rem">Vais receber um email com os dados de pagamento em breve.<br>Qualquer d\u00favida fala connosco no <a href="https://ig.me/m/by_luna_blossom" target="_blank" style="color:var(--gold)">@by_luna_blossom</a></p>
+                  </div>`
+          );
 
 // Also remove any leftover flower emoji in the success icon (legacy)
 html = html.replace(/<div class="success-icon"[^>]*>[\s\S]*?<\/div>/, '');
@@ -25,39 +25,45 @@ html = html.replace(/joias com mensagem/gi, 'j\u00f3ias com inten\u00e7\u00e3o')
 html = html.replace(/J\u00f3ias com mensagem/g, 'J\u00f3ias com inten\u00e7\u00e3o');
 html = html.replace(/JOIAS COM MENSAGEM/g, 'J\u00d3IAS COM INTEN\u00c7\u00c3O');
 
-// ── 4. Politica de privacidade: remover TODOS os wrappers com privacyCheck existentes ──
-// Usar regex global para apanhar todas as ocorrencias - qualquer div com input#privacyCheck
-let before4 = html;
-// Remove todas as divs que contenham id="privacyCheck" (abordagem de substituicao por marcador)
-html = html.replace(/<div[^>]*style="[^"]*margin[^"]*13px[^"]*"[^>]*>[\s\S]*?id="privacyCheck"[\s\S]*?<\/div>\s*<\/div>/g, 'PRIVACYCHECKPLACEHOLDER');
-html = html.replace(/PRIVACYCHECKPLACEHOLDER/g, '');
+// ── 4. Politica de privacidade: checkbox centrado antes do botao (idempotente) ──
+// Substituir o bloco completo do checkbox antigo (se existir) por um novo centrado
+// Padrao especifico para o checkbox antigo com margin:12px 0;font-size:13px
+html = html.replace(
+                  /<div style="margin:12px 0;font-size:13px;color:#555;">\s*<label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;">\s*<input type="checkbox" id="privacyCheck"[^>]*\/>\s*<span>[\s\S]*?<\/span>\s*<\/label>\s*<\/div>/g,
+                  ''
+          );
+// Substituir o novo checkbox (se ja existir com o estilo centrado) por nada para evitar duplicados
+html = html.replace(
+                  /<div style="margin:12px 0;font-size:13px;color:#555;display:flex;justify-content:center;">\s*<label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">\s*<input type="checkbox" id="privacyCheck"[^>]*\/>\s*<span>[\s\S]*?<\/span>\s*<\/label>\s*<\/div>/g,
+                  ''
+          );
 // Adicionar checkbox centrado antes do botao de submissao
 html = html.replace(
-          /(<button[^>]*id="btnSubmit"[^>]*>|<button[^>]*type="submit"[^>]*class="[^"]*btn-submit[^"]*"[^>]*>)/,
-          `<div style="margin:12px 0;font-size:13px;color:#555;display:flex;justify-content:center;">
-          <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
-          <input type="checkbox" id="privacyCheck" required style="margin:0;accent-color:#C4963A;width:14px;height:14px;flex-shrink:0;" />
-          <span>Li e aceito a <a href="privacidade.html" target="_blank" style="color:#C4963A;text-decoration:underline;">Pol\u00edtica de Privacidade e Devolu\u00e7\u00f5es</a></span>
-          </label>
-          </div>
-          $1`
-  );
+                  /(<button[^>]*id="btnSubmit"[^>]*>|<button[^>]*type="submit"[^>]*class="[^"]*btn-submit[^"]*"[^>]*>)/,
+                  `<div style="margin:12px 0;font-size:13px;color:#555;display:flex;justify-content:center;">
+                  <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
+                  <input type="checkbox" id="privacyCheck" required style="margin:0;accent-color:#C4963A;width:14px;height:14px;flex-shrink:0;" />
+                  <span>Li e aceito a <a href="privacidade.html" target="_blank" style="color:#C4963A;text-decoration:underline;">Pol\u00edtica de Privacidade e Devolu\u00e7\u00f5es</a></span>
+                  </label>
+                  </div>
+                  $1`
+          );
 
 // ── 5. Fix hero logo size - limitar largura ao titulo ──
 html = html.replace(
-          /<img src="logo-new\.png" alt="by Luna Blossom" class="hero-logo"[^>]*>/,
-          '<img src="logo-new.png" alt="by Luna Blossom" class="hero-logo" style="width:clamp(180px,28vw,280px);height:auto;display:block;margin:0 auto 1rem;">'
-  );
+                  /<img src="logo-new\.png" alt="by Luna Blossom" class="hero-logo"[^>]*>/,
+                  '<img src="logo-new.png" alt="by Luna Blossom" class="hero-logo" style="width:clamp(180px,28vw,280px);height:auto;display:block;margin:0 auto 1rem;">'
+          );
 
 // ── 6. Remove flor rosa do titulo da modal de confirmacao (Obrigada!) ──
 html = html.replace(
-          /document\.getElementById\('modalTitle'\)\.textContent\s*=\s*'Obrigada!\s*\u{1F338}'/u,
-          "document.getElementById('modalTitle').textContent = 'Obrigada!'"
-  );
+                  /document\.getElementById\('modalTitle'\)\.textContent\s*=\s*'Obrigada!\s*\u{1F338}'/u,
+                  "document.getElementById('modalTitle').textContent = 'Obrigada!'"
+          );
 html = html.replace(
-          "document.getElementById('modalTitle').textContent = 'Obrigada! \uD83C\uDF38'",
-          "document.getElementById('modalTitle').textContent = 'Obrigada!'"
-  );
+                  "document.getElementById('modalTitle').textContent = 'Obrigada! \uD83C\uDF38'",
+                  "document.getElementById('modalTitle').textContent = 'Obrigada!'"
+          );
 
 // ── 7. Cria pagina de politica de privacidade ──
 const privacyHtml = `<!DOCTYPE html>
