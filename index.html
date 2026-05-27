@@ -9,7 +9,7 @@
 :root{--gold:#C4963A;--gold-light:#E8C97A;--gold-pale:#FDF6E8;--lavender-deep:#7B5EA7;--cream:#FAF6F0;--dark:#1C1510;--mid:#5C4A3A;--silver:#8A96A4;--silver-light:#F0F2F5}
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
 body{background:var(--cream);color:var(--dark);font-family:'Jost',sans-serif;font-weight:300}
-.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 2rem;position:relative;background:linear-gradient(160deg,#FDF6E8 0%,#F0EAF8 50%,#FDF6E8 100%)}
+.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 2rem;position:relative;background:linear-gradient(160deg,#FDF6E8 0%,white 100%)}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(196,150,58,.08) 0%,transparent 70%);pointer-events:none}
 .sparkles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .sparkle{position:absolute;width:4px;height:4px;background:var(--gold);border-radius:50%;animation:twinkle var(--d,3s) ease-in-out infinite var(--delay,0s);opacity:0}
@@ -22,7 +22,7 @@ body{background:var(--cream);color:var(--dark);font-family:'Jost',sans-serif;fon
 .hero-divider::before,.hero-divider::after{content:'';flex:1;max-width:80px;height:.5px;background:var(--gold)}
 .hero-divider span{color:var(--gold)}
 .hero-tag{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);animation:fadeUp .8s ease .4s both;margin-bottom:2.5rem}
-.scroll-cta{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-decoration:none;animation:fadeUp .8s ease .5s both;display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.scroll-cta{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-decoration:none;animation:fadeUp .8s ease .5s both;display:flex;flex-direction:column;align-items:center}
 .scroll-cta::after{content:'↓';font-size:1.2rem;animation:bounce 2s ease infinite}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 section{padding:4rem 1.5rem;max-width:520px;margin:0 auto}
@@ -42,7 +42,7 @@ section{padding:4rem 1.5rem;max-width:520px;margin:0 auto}
 .color-selector{margin-bottom:1.2rem}
 .color-label{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.6rem;display:block}
 .color-options{display:flex;gap:.6rem}
-.color-opt{display:flex;align-items:center;gap:.5rem;padding:.5rem .9rem;border-radius:50px;border:1.5px solid #E0E0E0;cursor:pointer;font-size:.75rem;font-family:'Jost',sans-serif;color:var(--mid);background:white;transition:all .2s ease;user-select:none}
+.color-opt{display:flex;align-items:center;gap:.5rem;padding:.5rem .9rem;border-radius:50px;border:1.5px solid #E0E0E0;cursor:pointer;font-size:.75rem;font-family:'Jost',sans-serif;color:var(--mid);transition:all .2s}
 .color-opt:hover{border-color:var(--gold);color:var(--dark)}
 .sel-gold{border-color:var(--gold)!important;background:var(--gold-pale)!important;color:var(--dark)!important;font-weight:500!important}
 .sel-silver{border-color:var(--silver)!important;background:var(--silver-light)!important;color:var(--dark)!important;font-weight:500!important}
@@ -53,7 +53,7 @@ section{padding:4rem 1.5rem;max-width:520px;margin:0 auto}
 .card-meta{display:flex;flex-direction:column;gap:2px}
 .card-price{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--dark)}
 .card-ship{font-size:.7rem;color:var(--gold);letter-spacing:.1em}
-.btn-order{background:var(--dark);color:white;border:none;padding:.75rem 1.4rem;border-radius:50px;font-family:'Jost',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .2s,transform .2s;display:inline-flex;align-items:center;gap:.4rem;white-space:nowrap}
+.btn-order{background:var(--dark);color:white;border:none;padding:.75rem 1.4rem;border-radius:50px;font-family:'Jost',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .2s}
 .btn-order:hover{background:var(--gold);transform:scale(1.03)}
 .steps{display:flex;flex-direction:column;gap:1.2rem}
 .step{display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.25rem;background:white;border-radius:12px;border:.5px solid rgba(196,150,58,.2)}
@@ -87,10 +87,10 @@ footer a{color:var(--gold);text-decoration:none}
 .modal-form input:focus,.modal-form select:focus{border-color:var(--gold)}
 .qty-wrap{display:flex;align-items:center;gap:.8rem}
 .qty-wrap input{width:80px;text-align:center}
-.qty-btn{width:36px;height:36px;border-radius:50%;border:1.5px solid #E0E0E0;background:white;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--mid);flex-shrink:0;transition:border-color .2s,color .2s}
+.qty-btn{width:36px;height:36px;border-radius:50%;border:1.5px solid #E0E0E0;background:white;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--mid);transition:all .2s}
 .qty-btn:hover{border-color:var(--gold);color:var(--gold)}
 .modal-total{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--dark);text-align:right;margin:.5rem 0}
-.btn-submit{width:100%;background:var(--dark);color:white;border:none;padding:1rem;border-radius:50px;font-family:'Jost',sans-serif;font-size:.8rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-top:.5rem}
+.btn-submit{width:100%;background:var(--dark);color:white;border:none;padding:1rem;border-radius:50px;font-family:'Jost',sans-serif;font-size:.8rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:all .2s}
 .btn-submit:hover{background:var(--gold)}
 .btn-submit:disabled{background:#ccc;cursor:not-allowed}
 .modal-success{text-align:center;padding:1.5rem 0}
@@ -100,17 +100,17 @@ footer a{color:var(--gold);text-decoration:none}
 .modal-success .num-enc{font-weight:600;color:var(--gold);font-size:1rem}
 .field-error{border-color:#e74c3c!important}
 .error-msg{font-size:.72rem;color:#e74c3c;margin-top:.2rem}
-.cart-fab{position:fixed;top:1.2rem;right:1.2rem;z-index:9999;background:var(--dark);color:white;border:none;border-radius:50px;padding:.6rem 1.1rem;font-family:'Jost',sans-serif;font-size:.8rem;font-weight:500;letter-spacing:.1em;cursor:pointer;display:flex;align-items:center;gap:.5rem;box-shadow:0 4px 20px rgba(28,21,16,.3);transition:background .2s,transform .2s}
+.cart-fab{position:fixed;top:1.2rem;right:1.2rem;z-index:9999;background:var(--dark);color:white;border:none;border-radius:50px;padding:.6rem 1.1rem;font-family:'Jost',sans-serif;font-size:.8rem;font-weight:500;letter-spacing:.1em;cursor:pointer;transition:all .2s}
 .cart-fab:hover{background:var(--gold);transform:scale(1.05)}
 .cart-fab.hidden{display:none!important}
 .cart-badge{background:var(--gold);color:white;border-radius:50%;width:20px;height:20px;font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center}
-.btn-add{background:white;color:var(--dark);border:1.5px solid var(--dark);padding:.75rem 1.4rem;border-radius:50px;font-family:'Jost',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem;white-space:nowrap}
+.btn-add{background:white;color:var(--dark);border:1.5px solid var(--dark);padding:.75rem 1.4rem;border-radius:50px;font-family:'Jost',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s}
 .btn-add:hover{background:var(--dark);color:white}
 .btn-add.added{background:var(--gold)!important;color:white!important;border-color:var(--gold)!important}
 .cart-items{display:flex;flex-direction:column;gap:.8rem;margin-bottom:1.5rem}
 .cart-item{background:white;border-radius:12px;padding:1rem 1.2rem;border:.5px solid rgba(196,150,58,.2);display:flex;align-items:center;gap:1rem}
 .cart-item-img{width:56px;height:56px;border-radius:8px;object-fit:cover;flex-shrink:0}
-.cart-item-img-ph{width:56px;height:56px;border-radius:8px;background:var(--gold-pale);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.55rem;color:var(--gold);text-align:center;padding:.2rem;font-family:'Cormorant Garamond',serif;font-style:italic}
+.cart-item-img-ph{width:56px;height:56px;border-radius:8px;background:var(--gold-pale);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.55rem;color:var(--gold);text-align:center;font-weight:500}
 .cart-item-info{flex:1;min-width:0}
 .cart-item-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--dark);margin-bottom:.15rem}
 .cart-item-meta{font-size:.75rem;color:var(--mid)}
@@ -119,7 +119,7 @@ footer a{color:var(--gold);text-decoration:none}
 .cart-item-remove{background:none;border:none;color:#ccc;cursor:pointer;font-size:1rem;padding:.1rem;line-height:1;transition:color .2s}
 .cart-item-remove:hover{color:#e74c3c}
 .cqty-wrap{display:flex;align-items:center;gap:.4rem;margin-top:.4rem}
-.cqty-btn{width:24px;height:24px;border-radius:50%;border:1px solid #E0E0E0;background:white;font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--mid);transition:border-color .2s}
+.cqty-btn{width:24px;height:24px;border-radius:50%;border:1px solid #E0E0E0;background:white;font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--mid);transition:all .2s}
 .cqty-btn:hover{border-color:var(--gold);color:var(--gold)}
 .cqty-val{font-size:.85rem;color:var(--dark);min-width:1.2rem;text-align:center}
 .cart-empty{text-align:center;padding:2rem;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--mid)}
@@ -129,17 +129,17 @@ footer a{color:var(--gold);text-decoration:none}
 <body>
 <div class="sparkles" id="sparkles"></div>
 <div class="hero">
-  <img src="logo-new.png" alt="by Luna Blossom" class="hero-logo" style="width:clamp(180px,28vw,280px);height:auto;display:block;margin:0 auto 1rem;">
+  <img src="logo-new.png" alt="by Luna Blossom" class="hero-logo">
   <p class="hero-eyebrow">jóias com intenção &middot; empowerment feminino</p>
   <h1 class="hero-title">by <em>Luna</em><br>Blossom</h1>
-  <p class="hero-sub">N&atilde;o &eacute; s&oacute; uma joia. &Eacute; uma declara&ccedil;&atilde;o.</p>
+  <p class="hero-sub">Não é só uma joia. É uma declaração.</p>
   <div class="hero-divider"><span>&#10022;</span></div>
-  <p class="hero-tag">Medalhas gravadas &middot; A&ccedil;o cor dourado &amp; prateado &middot; 16&euro; &middot; Envio gr&aacute;tis</p>
-  <a href="#catalogo" class="scroll-cta">Ver cole&ccedil;&atilde;o</a>
+  <p class="hero-tag">Medalhas gravadas &middot; Aço cor dourado &amp; prateado &middot; 16€ &middot; Envio grátis</p>
+  <a href="#catalogo" class="scroll-cta">Ver coleção</a>
 </div>
 <section id="catalogo">
-  <p class="section-label fade-in">Cole&ccedil;&atilde;o</p>
-  <h2 class="section-title fade-in">Escolhe a tua<br><em>declara&ccedil;&atilde;o</em></h2>
+  <p class="section-label fade-in">Coleção</p>
+  <h2 class="section-title fade-in">Escolhe a tua<br><em>declaração</em></h2>
   <div class="cards" id="cards"></div>
 </section>
 <section>
@@ -149,13 +149,13 @@ footer a{color:var(--gold);text-decoration:none}
     <div class="step fade-in"><div class="step-num">1</div><div class="step-text"><h4>Escolhe a tua medalha</h4><p>Seleciona a mensagem e a cor. Clica em Encomendar.</p></div></div>
     <div class="step fade-in"><div class="step-num">2</div><div class="step-text"><h4>Preenche os teus dados</h4><p>Nome, morada e contacto. Confirmamos tudo antes de enviar.</p></div></div>
     <div class="step fade-in"><div class="step-num">3</div><div class="step-text"><h4>Pagamento seguro</h4><p>MBWay ou PayPal.</p></div></div>
-    <div class="step fade-in"><div class="step-num">4</div><div class="step-text"><h4>Recebe em casa</h4><p>Envio para todo Portugal. Gr&aacute;tis. Embalagem cuidada com muito amor.</p></div></div>
+    <div class="step fade-in"><div class="step-num">4</div><div class="step-text"><h4>Recebe em casa</h4><p>Envio para todo Portugal. Grátis. Embalagem cuidada com muito amor.</p></div></div>
   </div>
 </section>
 <section>
   <div class="promise fade-in">
     <div class="promise-icon">&#10022;</div>
-    <h3>Cada joia &eacute; uma declara&ccedil;&atilde;o.</h3>
+    <h3>Cada joia é uma declaração.</h3>
     <p>Criadas em Portugal, com atitude. Porque uma mulher que sabe o que quer merece uma jóia que o diga em voz alta.</p>
   </div>
 </section>
@@ -194,16 +194,92 @@ footer a{color:var(--gold);text-decoration:none}
           </select>
         </div>
         <div class="modal-total" id="modalTotal">Total: 0€</div>
-        
+        <button class="btn-submit" id="btnSubmit" onclick="submitEncomenda()">Confirmar encomenda →</button>
+      </div>
+    </div>
     <div class="modal-success" id="stepSuccess" style="display:none">
-          <img src="logo-new.png" alt="by Luna Blossom" style="width:100px;margin:0 auto 0.5rem;display:block;">
-          <h3>Encomenda recebida!</h3>
-          <p style="margin-top:1rem">Vais receber um email com os dados de pagamento em breve.<br>Qualquer dúvida fala connosco no <a href="https://ig.me/m/by_luna_blossom" target="_blank" style="color:var(--gold)">@by_luna_blossom</a></p>
-          </div>'
-      +'<div class="cart-item-right">'
-      +'<span class="cart-item-price">'+(item.qty*PRECO)+'€</span>'
-      +'<button class="cart-item-remove" onclick="removeFromCart('+i+')" title="Remover">✕</button>'
-      +'</div>';
+      <div class="success-icon">✨🌙✨</div>
+      <h3>Encomenda recebida!</h3>
+      <p style="margin-top:1rem">Vais receber um email com os dados de pagamento em breve.<br>Qualquer dúvida fala connosco no <a href="https://www.instagram.com/by_luna_blossom/" target="_blank">Instagram</a></p>
+    </div>
+  </div>
+</div>
+<script>
+var SCRIPT_URL='https://script.google.com/macros/s/AKfycbzQ6SlYGHM5AUY3D7XHu5C97qiBGxGXqg8291DWiAtDWavhzrxNwc7MCHTVBFMLZw2zoQ/exec';
+var PRECO=16;
+var cart=[];
+var MEDALHAS=[
+  {img:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',nome:'Medalha 1',mm:'med1',desc:'Descrição 1'},
+  {img:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',nome:'Medalha 2',mm:'med2',desc:'Descrição 2'},
+  {img:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',nome:'Medalha 3',mm:'med3',desc:'Descrição 3'},
+  {img:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',nome:'Medalha 4',mm:'med4',desc:'Descrição 4'}
+];
+
+function renderCards(){
+  var container=document.getElementById('cards');
+  container.innerHTML='';
+  MEDALHAS.forEach(function(medalha,idx){
+    var div=document.createElement('div');
+    div.className='card';
+    var colorOpts='<div class="color-label">Cor</div><div class="color-options"><div class="color-opt sel-gold"><span class="dot dot-g"></span> Dourado</div><div class="color-opt"><span class="dot dot-s"></span> Prateado</div></div>';
+    div.innerHTML='<div class="card-img-wrap"><img src="'+medalha.img+'" alt="'+medalha.nome+'"></div>'+
+      '<div class="card-body">'+
+      '<p class="card-size-tag">Tamanho único</p>'+
+      '<h3 class="card-name">'+medalha.nome+'</h3>'+
+      '<p class="card-desc">'+medalha.desc+'</p>'+
+      '<div class="color-selector">'+colorOpts+'</div>'+
+      '<div class="card-footer">'+
+      '<div class="card-meta"><div class="card-price">16€</div><div class="card-ship">Envio grátis</div></div>'+
+      '<button class="btn-add" onclick="addToCart('+idx+')">Encomendar</button>'+
+      '</div></div></div>';
+    container.appendChild(div);
+  });
+}
+
+function addToCart(idx){
+  var medalha=MEDALHAS[idx];
+  var cor=document.querySelectorAll('.card')[idx].querySelector('.sel-gold')?'Dourado':'Prateado';
+  cart.push({nome:medalha.nome,mm:medalha.mm,cor:cor,qty:1});
+  renderCartItems();updateCartTotal();updateCartBadge();
+  document.getElementById('cartFab').classList.remove('hidden');
+}
+
+function openCart(){
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('stepCart').style.display='block';
+  document.getElementById('stepForm').style.display='none';
+  document.getElementById('stepSuccess').style.display='none';
+  document.getElementById('modalTitle').textContent='O teu carrinho';
+}
+
+function updateCartBadge(){
+  var badge=document.getElementById('cartBadge');
+  var total=cart.reduce(function(s,i){return s+i.qty;},0);
+  badge.textContent=total;
+  if(total===0)document.getElementById('cartFab').classList.add('hidden');
+}
+
+function renderCartItems(){
+  var list=document.getElementById('cartItemsList');
+  list.innerHTML='';
+  cart.forEach(function(item,i){
+    var div=document.createElement('div');
+    div.className='cart-item';
+    div.innerHTML='<div class="cart-item-img-ph">🏅</div>'+
+      '<div class="cart-item-info">'+
+      '<div class="cart-item-name">'+item.nome+'</div>'+
+      '<div class="cart-item-meta">'+item.cor+'</div>'+
+      '<div class="cqty-wrap">'+
+      '<button class="cqty-btn" onclick="changeCartQty('+i+',-1)">−</button>'+
+      '<span class="cqty-val">'+item.qty+'</span>'+
+      '<button class="cqty-btn" onclick="changeCartQty('+i+',1)">+</button>'+
+      '</div>'+
+      '</div>'+
+      '<div class="cart-item-right">'+
+      '<span class="cart-item-price">'+(item.qty*PRECO)+'€</span>'+
+      '<button class="cart-item-remove" onclick="removeFromCart('+i+')" title="Remover">✕</button>'+
+      '</div>';
     list.appendChild(div);
   });
 }
@@ -283,6 +359,7 @@ function submitEncomenda(){
   });
 }
 
+renderCards();
 var sc=document.getElementById('sparkles');
 for(var j=0;j<18;j++){
   var s=document.createElement('div');s.className='sparkle';
