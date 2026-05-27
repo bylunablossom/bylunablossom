@@ -195,23 +195,19 @@ footer a{color:var(--gold);text-decoration:none}
         </div>
         <div class="modal-total" id="modalTotal">Total: 0€</div>
         <div style="margin:12px 0;font-size:13px;color:#555;display:flex;justify-content:center;">
-          <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
-          <input type="checkbox" id="privacyCheck" required style="margin:0;accent-color:#C4963A;width:14px;height:14px;flex-shrink:0;" />
-          <span>Li e aceito a <a href="privacidade.html" target="_blank" style="color:#C4963A;text-decoration:underline;">Política de Privacidade e Devoluções</a></span>
-          </label>
-          </div>
-          <button class="btn-submit" id="btnSubmit" onclick="submitEncomenda()">Confirmar encomenda →</button>
+                  <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
+                  <input type="checkbox" id="privacyCheck" required style="margin:0;accent-color:#C4963A;width:14px;height:14px;flex-shrink:0;" />
+                  <span>Li e aceito a <a href="privacidade.html" target="_blank" style="color:#C4963A;text-decoration:underline;">Política de Privacidade e Devoluções</a></span>
+                  </label>
+                  </div>
+                  <button class="btn-submit" id="btnSubmit" onclick="submitEncomenda()">Confirmar encomenda →</button>
       </div>
     </div>
     <div class="modal-success" id="stepSuccess" style="display:none">
-          <img src="logo-new.png" alt="by Luna Blossom" style="width:100px;margin:0 auto 0.5rem;display:block;">
-          <h3>Encomenda recebida!</h3>
-          <p style="margin-top:1rem">Vais receber um email com os dados de pagamento em breve.<br>Qualquer dúvida fala connosco no <a href="https://ig.me/m/by_luna_blossom" target="_blank" style="color:var(--gold)">@by_luna_blossom</a></p>
-          </div>'
-    +'<div class="card-footer">'
-    +'<div class="card-meta"><span class="card-price">16&#8364;</span><span class="card-ship">&#10022; Envio gratis</span></div>'
-    +'<button class="btn-add" onclick="addToCart('+i+')" id="btn-'+i+'">+ Adicionar</button>'
-    +'</div></div>';
+                  <img src="logo-new.png" alt="by Luna Blossom" style="width:100px;margin:0 auto 0.5rem;display:block;">
+                  <h3>Encomenda recebida!</h3>
+                  <p style="margin-top:1rem">Vais receber um email com os dados de pagamento em breve.<br>Qualquer dúvida fala connosco no <a href="https://ig.me/m/by_luna_blossom" target="_blank" style="color:var(--gold)">@by_luna_blossom</a></p>
+                  </div>';
   container.appendChild(card);
 });
 
