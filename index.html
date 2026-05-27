@@ -194,92 +194,12 @@ footer a{color:var(--gold);text-decoration:none}
           </select>
         </div>
         <div class="modal-total" id="modalTotal">Total: 0€</div>
-        <div style="margin:12px 0;font-size:13px;color:#555;display:flex;justify-content:center;">
-                  <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
-                  <input type="checkbox" id="privacyCheck" required style="margin:0;accent-color:#C4963A;width:14px;height:14px;flex-shrink:0;" />
-                  <span>Li e aceito a <a href="privacidade.html" target="_blank" style="color:#C4963A;text-decoration:underline;">Política de Privacidade e Devoluções</a></span>
-                  </label>
-                  </div>
-                  <button class="btn-submit" id="btnSubmit" onclick="submitEncomenda()">Confirmar encomenda →</button>
-      </div>
-    </div>
+        
     <div class="modal-success" id="stepSuccess" style="display:none">
-                  <img src="logo-new.png" alt="by Luna Blossom" style="width:100px;margin:0 auto 0.5rem;display:block;">
-                  <h3>Encomenda recebida!</h3>
-                  <p style="margin-top:1rem">Vais receber um email com os dados de pagamento em breve.<br>Qualquer dúvida fala connosco no <a href="https://ig.me/m/by_luna_blossom" target="_blank" style="color:var(--gold)">@by_luna_blossom</a></p>
-                  </div>';
-  container.appendChild(card);
-});
-
-function selectColor(btn){
-  var opts=btn.closest('.color-options').querySelectorAll('.color-opt');
-  opts.forEach(function(o){o.classList.remove('sel-gold','sel-silver');});
-  btn.classList.add(btn.dataset.color==='dourado'?'sel-gold':'sel-silver');
-}
-
-function getSelectedColor(idx){
-  var opts=document.querySelectorAll('[data-idx="'+idx+'"]');
-  for(var i=0;i<opts.length;i++){
-    if(opts[i].classList.contains('sel-gold')||opts[i].classList.contains('sel-silver'))
-      return opts[i].dataset.color;
-  }
-  return 'dourado';
-}
-
-function addToCart(idx){
-  var m=MEDALHAS[idx];
-  var cor=getSelectedColor(idx);
-  var existing=null;
-  for(var i=0;i<cart.length;i++){if(cart[i].idx===idx&&cart[i].cor===cor){existing=cart[i];break;}}
-  if(existing){if(existing.qty<14)existing.qty++;}
-  else{cart.push({idx:idx,nome:m.nome,cor:cor,mm:m.mm,img:m.img,qty:1});}
-  updateCartBadge();
-  var btn=document.getElementById('btn-'+idx);
-  btn.classList.add('added');btn.textContent='✓ Adicionado';
-  setTimeout(function(){btn.classList.remove('added');btn.textContent='+ Adicionar';},1500);
-}
-
-function updateCartBadge(){
-  var total=cart.reduce(function(s,i){return s+i.qty;},0);
-  document.getElementById('cartBadge').textContent=total;
-  var fab=document.getElementById('cartFab');
-  if(total>0)fab.classList.remove('hidden');
-  else fab.classList.add('hidden');
-}
-
-function openCart(){
-  renderCartItems();
-  updateCartTotal();
-  document.getElementById('stepCart').style.display='block';
-  document.getElementById('stepForm').style.display='none';
-  document.getElementById('stepSuccess').style.display='none';
-  document.getElementById('modalTitle').textContent='O teu carrinho';
-  document.getElementById('modalOverlay').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-
-function renderCartItems(){
-  var list=document.getElementById('cartItemsList');
-  if(cart.length===0){
-    list.innerHTML='<div class="cart-empty">O teu carrinho está vazio</div>';
-    document.getElementById('btnCheckout').style.display='none';
-    return;
-  }
-  document.getElementById('btnCheckout').style.display='block';
-  list.innerHTML='';
-  cart.forEach(function(item,i){
-    var div=document.createElement('div');div.className='cart-item';
-    var imgHtml=item.img&&item.img.length>0?'<img class="cart-item-img" src="'+item.img+'" alt="">':'<div class="cart-item-img-ph">'+item.nome+'</div>';
-    var corLabel=item.cor==='dourado'?'Cor dourado':'Cor prateado';
-    div.innerHTML=imgHtml
-      +'<div class="cart-item-info">'
-      +'<div class="cart-item-name">'+item.nome+'</div>'
-      +'<div class="cart-item-meta">'+corLabel+' · '+item.mm+'</div>'
-      +'<div class="cqty-wrap">'
-      +'<button class="cqty-btn" onclick="changeCartQty('+i+',-1)">−</button>'
-      +'<span class="cqty-val" id="cqty-'+i+'">'+item.qty+'</span>'
-      +'<button class="cqty-btn" onclick="changeCartQty('+i+',1)">+</button>'
-      +'</div></div>'
+          <img src="logo-new.png" alt="by Luna Blossom" style="width:100px;margin:0 auto 0.5rem;display:block;">
+          <h3>Encomenda recebida!</h3>
+          <p style="margin-top:1rem">Vais receber um email com os dados de pagamento em breve.<br>Qualquer dúvida fala connosco no <a href="https://ig.me/m/by_luna_blossom" target="_blank" style="color:var(--gold)">@by_luna_blossom</a></p>
+          </div>'
       +'<div class="cart-item-right">'
       +'<span class="cart-item-price">'+(item.qty*PRECO)+'€</span>'
       +'<button class="cart-item-remove" onclick="removeFromCart('+i+')" title="Remover">✕</button>'
