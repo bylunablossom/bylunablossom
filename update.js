@@ -100,5 +100,23 @@ footer { margin-top: 40px; font-size: 12px; color: #888; text-align: center; }
 
 fs.writeFileSync('privacidade.html', privacyHtml);
 
+// ── 8. Preço 13€ para medalhas 15mm (Fuck you 15mm e Hand and Flower 15mm) ──
+html = html.replace(
+  'card-price">16€</span><span class="card-ship">✶ Envio gratis</span></div><button class="btn-add" onclick="addToCart(17)"',
+  'card-price">13€</span><span class="card-ship">✶ Envio gratis</span></div><button class="btn-add" onclick="addToCart(17)"'
+);
+html = html.replace(
+  'card-price">16€</span><span class="card-ship">✶ Envio gratis</span></div><button class="btn-add" onclick="addToCart(18)"',
+  'card-price">13€</span><span class="card-ship">✶ Envio gratis</span></div><button class="btn-add" onclick="addToCart(18)"'
+);
+
+// ── 9. Privacidade - cláusula peças personalizadas não devolvidas ──
+let privHtml2 = fs.readFileSync('privacidade.html', 'utf8');
+privHtml2 = privHtml2.replace(
+  '<p>Os custos de devolução são da responsabilidade do comprador.</p>',
+  '<p style="background:#fff8ef;border-left:3px solid #C4963A;padding:10px 14px;margin:12px 0;border-radius:0 6px 6px 0;"><strong>Peças personalizadas:</strong> As peças com gravação personalizada são produzidas exclusivamente para cada cliente e <strong>não podem ser devolvidas nem trocadas.</strong></p>\n<p>Os custos de devolução são da responsabilidade do comprador.</p>'
+);
+fs.writeFileSync('privacidade.html', privHtml2);
+
 fs.writeFileSync('index.html', html);
 console.log('Done! index.html e privacidade.html actualizados.');
