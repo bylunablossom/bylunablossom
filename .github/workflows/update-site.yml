@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: node update.js
-        - run: node add-colar.js
+      - run: node add-colar.js
       - run: |
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
