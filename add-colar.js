@@ -25,32 +25,36 @@ if (!html.includes(oldEnd)) { console.error('ERROR: MEDALHAS closing not found')
 html = html.replace(oldEnd, newEnd);
 console.log('1. MEDALHAS entry added');
 
-// ── 2. Add card HTML after btn-18 ──
-const btn18 = 'onclick="addToCart(18)" id="btn-18">+ Adicionar<\/button><\/div><\/div><\/div>';
-const newCard = 'onclick="addToCart(18)" id="btn-18">+ Adicionar<\/button><\/div><\/div><\/div>' +
-`\n<div class="card fade-in" id="card-19" style="border:2px solid #C4963A;position:relative;">\n` +
-`<div style="position:absolute;top:10px;right:10px;background:#C4963A;color:white;font-size:10px;font-weight:bold;padding:3px 8px;border-radius:10px;letter-spacing:1px;z-index:2;">\u2736 PERSONALIZADO<\/div>\n` +
-`<div class="card-img-wrap"><img src='` + COLAR_IMG + `' alt="colar personalizado" loading="lazy"><\/div>\n` +
-`<div class="card-body">\n` +
-`<div class="card-size-tag">Colar Personalizado - A\u00e7o<\/div>\n` +
-`<div class="card-name">Tell us your message!<\/div>\n` +
-`<div class="card-desc">Escreve a tua mensagem e usa-a ao pesco\u00e7o. M\u00e1ximo 25 caracteres.<\/div>\n` +
-`<div class="color-selector"><span class="color-label">Escolhe a cor<\/span><div class="color-options">\n` +
-`<button class="color-opt sel-gold" data-color="dourado" data-idx="19" onclick="selectColor(this)"><span class="dot dot-g"><\/span> Cor dourado<\/button>\n` +
-`<button class="color-opt" data-color="prateado" data-idx="19" onclick="selectColor(this)"><span class="dot dot-s"><\/span> Cor prateado<\/button>\n` +
-`<\/div><\/div>\n` +
-`<div style="margin:12px 0;">\n` +
-`<label style="font-size:12px;color:#666;font-weight:600;letter-spacing:0.5px;display:block;margin-bottom:6px;text-transform:uppercase;">A tua mensagem<\/label>\n` +
-`<input type="text" id="msg-personalizada-19" maxlength="25" placeholder="Ex: Para sempre minha" style="width:100%;box-sizing:border-box;padding:8px 12px;border:1px solid #C4963A;border-radius:8px;font-family:Georgia,serif;font-size:14px;color:#2C2C2C;background:#fffdf7;outline:none;" oninput="this.nextElementSibling.textContent=this.value.length+'/25'"/>\n` +
-`<span style="font-size:11px;color:#999;display:block;text-align:right;margin-top:3px;">0/25<\/span>\n` +
-`<\/div>\n` +
-`<div class="card-footer">\n` +
-`<div class="card-meta"><span class="card-price">22\u20AC<\/span><span class="card-ship">\u2736 Envio gratis<\/span><\/div>\n` +
-`<button class="btn-add" onclick="addPersonalizado(19)" id="btn-19">+ Adicionar<\/button>\n` +
-`<\/div><\/div><\/div>`;
-if (!html.includes(btn18)) { console.error('ERROR: btn-18 pattern not found'); process.exit(1); }
-html = html.replace(btn18, newCard);
-console.log('2. Card HTML added');
+// ── 2. Modify render loop - before container.appendChild(card), add special handling for idx 19 ──
+const appendPattern = `  container.appendChild(card);
+});
+
+function selectColor(btn){`;
+const newAppend = `  // Special handling for personalized necklace (idx 19)
+  if(i === 19){
+    card.style.border = '2px solid #C4963A';
+    card.style.position = 'relative';
+    var badge = document.createElement('div');
+    badge.style.cssText = 'position:absolute;top:10px;right:10px;background:#C4963A;color:white;font-size:10px;font-weight:bold;padding:3px 8px;border-radius:10px;letter-spacing:1px;z-index:2;';
+    badge.textContent = '\u2736 PERSONALIZADO';
+    card.insertBefore(badge, card.firstChild);
+    var btn19 = card.querySelector('.btn-add');
+    if(btn19){
+      var inputWrap = document.createElement('div');
+      inputWrap.style.cssText = 'margin:12px 0;';
+      inputWrap.innerHTML = '<label style=\"font-size:12px;color:#666;font-weight:600;letter-spacing:0.5px;display:block;margin-bottom:6px;text-transform:uppercase;\">A tua mensagem</label><input type=\"text\" id=\"msg-personalizada-19\" maxlength=\"25\" placeholder=\"Ex: Para sempre minha\" style=\"width:100%;box-sizing:border-box;padding:8px 12px;border:1px solid #C4963A;border-radius:8px;font-family:Georgia,serif;font-size:14px;color:#2C2C2C;background:#fffdf7;outline:none;\" oninput=\"this.nextElementSibling.textContent=this.value.length+\'/25\'\"/><span style=\"font-size:11px;color:#999;display:block;text-align:right;margin-top:3px;\">0/25</span>';
+      btn19.parentElement.insertBefore(inputWrap, btn19);
+      btn19.setAttribute('onclick', 'addPersonalizado(19)');
+      btn19.id = 'btn-19';
+    }
+  }
+  container.appendChild(card);
+});
+
+function selectColor(btn){`;
+if (!html.includes(appendPattern)) { console.error('ERROR: render loop closing not found'); process.exit(1); }
+html = html.replace(appendPattern, newAppend);
+console.log('2. Render loop modified for card 19');
 
 // ── 3. Add addPersonalizado function before submitEncomenda ──
 const submitFn = 'function submitEncomenda()';
@@ -80,7 +84,6 @@ html = html.replace(submitFn, newFn);
 console.log('3. addPersonalizado function added');
 
 // ── 4. Price fix patch before </body> ──
-const bodyClose = '<\/body>';
 const pricePatch = `<script>
 (function(){
 var _orig=window.renderCartItems;
@@ -96,8 +99,8 @@ for(var i=0;i<els.length;i++){var el=els[i];if(!el.children.length&&el.textConte
 };
 })();
 <\/script>
-<\/body>`;
-html = html.replace('<\/body>', pricePatch);
+</body>`;
+html = html.replace('</body>', pricePatch);
 console.log('4. Price patch added');
 
 fs.writeFileSync('index.html', html);
