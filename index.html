@@ -308,7 +308,7 @@ function addToCart(idx){
   var existing=null;
   for(var i=0;i<cart.length;i++){if(cart[i].idx===idx&&cart[i].cor===cor){existing=cart[i];break;}}
   if(existing){if(existing.qty<14)existing.qty++;}
-  else{cart.push({idx:idx,nome:m.nome,cor:cor,mm:m.mm,img:m.img,qty:1});}
+  else{cart.push({idx:idx,nome:m.nome,cor:cor,mm:m.mm,img:m.img,qty:1,preco:m.mm==='15mm'?13:16});}
   updateCartBadge();
   var btn=document.getElementById('btn-'+idx);
   btn.classList.add('added');btn.textContent='✓ Adicionado';
@@ -357,7 +357,7 @@ function renderCartItems(){
       +'<button class="cqty-btn" onclick="changeCartQty('+i+',1)">+</button>'
       +'</div></div>'
       +'<div class="cart-item-right">'
-      +'<span class="cart-item-price">'+(item.qty*PRECO)+'€</span>'
+      +'<span class="cart-item-price">'+(item.qty*item.preco)+'€</span>'
       +'<button class="cart-item-remove" onclick="removeFromCart('+i+')" title="Remover">✕</button>'
       +'</div>';
     list.appendChild(div);
@@ -375,7 +375,7 @@ function removeFromCart(i){
 
 function updateCartTotal(){
   var pais=document.getElementById('fPais')?document.getElementById('fPais').value:'PT';
-  var subtotal=cart.reduce(function(s,i){return s+i.qty*PRECO;},0);
+  var subtotal=cart.reduce(function(s,i){return s+i.qty*i.preco;},0);
   var portes=pais==='PT'?0:5;
   var total=subtotal+portes;
   var el=document.getElementById('cartTotal');if(el)el.textContent='Total: '+total+'€';
