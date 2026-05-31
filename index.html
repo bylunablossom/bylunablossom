@@ -284,6 +284,8 @@ card.innerHTML =
   +'<div class="card-meta"><span class="card-price">'+precoCard+'</span><span class="card-ship">✦ Envio gratis</span></div>'
   +'<button class="btn-add" onclick="addToCart('+i+')" id="btn-'+i+'">+ Adicionar</button>'
   +'</div></div>';
+    container.appendChild(card);
+    });
 
 function selectColor(btn){
   var opts=btn.closest('.color-options').querySelectorAll('.color-opt');
