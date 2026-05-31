@@ -264,22 +264,26 @@ MEDALHAS.forEach(function(m,i){
   var card=document.createElement('div');
   card.className='card fade-in';
   var imgHtml=hasImg?('<img src="'+m.img+'" alt="medalha" loading="lazy">'):'<div class="card-img-placeholder">'+m.nome+'</div>';
-  card.innerHTML='<div class="card-img-wrap">'+imgHtml+'</div>'
-    +'<div class="card-body">'
-    +'<div class="card-size-tag">Medalha '+m.mm+' - Aço</div>'
-    +'<div class="card-name">'+m.nome+'</div>'
-    +'<div class="card-desc">'+m.desc+'</div>'
-    +'<div class="color-selector"><span class="color-label">Escolhe a cor</span>'
-    +'<div class="color-options">'
-    +'<button class="color-opt sel-gold" data-color="dourado" data-idx="'+i+'" onclick="selectColor(this)"><span class="dot dot-g"></span> Cor dourado</button>'
-    +'<button class="color-opt" data-color="prateado" data-idx="'+i+'" onclick="selectColor(this)"><span class="dot dot-s"></span> Cor prateado</button>'
-    +'</div></div>'
-    +'<div class="card-footer">'
-    +'<div class="card-meta"><span class="card-price">16&#8364;</span><span class="card-ship">&#10022; Envio gratis</span></div>'
-    +'<button class="btn-add" onclick="addToCart('+i+')" id="btn-'+i+'">+ Adicionar</button>'
-    +'</div></div>';
-  container.appendChild(card);
-});
+  var precoCard =
+    m.mm === '15mm' ? '13€' :
+    m.mm === 'personalizado' ? '22€' :
+    '16€';
+
+card.innerHTML =
+  '<div class="card-img-wrap">'+imgHtml+'</div>'
+  +'<div class="card-body">'
+  +'<div class="card-size-tag">Medalha '+m.mm+' - Aço</div>'
+  +'<div class="card-name">'+m.nome+'</div>'
+  +'<div class="card-desc">'+m.desc+'</div>'
+  +'<div class="color-selector"><span class="color-label">Escolhe a cor</span>'
+  +'<div class="color-options">'
+  +'<button class="color-opt sel-gold" data-color="dourado" data-idx="'+i+'" onclick="selectColor(this)"><span class="dot dot-g"></span> Cor dourado</button>'
+  +'<button class="color-opt" data-color="prateado" data-idx="'+i+'" onclick="selectColor(this)"><span class="dot dot-s"></span> Cor prateado</button>'
+  +'</div></div>'
+  +'<div class="card-footer">'
+  +'<div class="card-meta"><span class="card-price">'+precoCard+'</span><span class="card-ship">✦ Envio gratis</span></div>'
+  +'<button class="btn-add" onclick="addToCart('+i+')" id="btn-'+i+'">+ Adicionar</button>'
+  +'</div></div>';
 
 function selectColor(btn){
   var opts=btn.closest('.color-options').querySelectorAll('.color-opt');
