@@ -1,6 +1,9 @@
 const fs = require('fs');
 let html = fs.readFileSync('index.html', 'utf8');
 
+// Normalize line endings
+html = html.replace(/\r\n/g, '\n');
+
 // Idempotency check
 if (html.includes('addPersonalizado(19)')) {
   console.log('Colar personalizado already added - skipping.');
@@ -52,24 +55,24 @@ console.log('2. Card HTML added');
 // ── 3. Add addPersonalizado function before submitEncomenda ──
 const submitFn = 'function submitEncomenda()';
 const newFn = `function addPersonalizado(idx){
-  var inputEl=document.getElementById('msg-personalizada-'+idx);
-  var msg=inputEl?inputEl.value.trim():'';
-  if(!msg){inputEl.style.border='2px solid #e44';inputEl.placeholder='Por favor escreve a tua mensagem!';inputEl.focus();return;}
-  if(msg.length>25){inputEl.style.border='2px solid #e44';return;}
-  inputEl.style.border='1px solid #C4963A';
-  var m=MEDALHAS[idx];
-  var silverBtn=document.querySelector('.color-opt.sel-silver[data-idx="'+idx+'"]');
-  var cor=silverBtn?'prateado':'dourado';
-  var msgKey='P: '+msg;
-  var existing=cart.find(function(c){return c.idx===idx&&c.nome===msgKey&&c.cor===cor;});
-  if(existing){existing.qty++;}
-  else{cart.push({idx:idx,nome:msgKey,cor:cor,mm:'personalizado',img:m.img,qty:1,preco:22});}
-  updateCartBadge();
-  var btn=document.getElementById('btn-'+idx);
-  var orig=btn.textContent;
-  btn.textContent='\u2713 Adicionado!';
-  btn.style.background='#2C6B2F';btn.style.color='white';btn.style.borderColor='#2C6B2F';
-  setTimeout(function(){btn.textContent=orig;btn.style.background='';btn.style.color='';btn.style.borderColor='';},1500);
+var inputEl=document.getElementById('msg-personalizada-'+idx);
+var msg=inputEl?inputEl.value.trim():'';
+if(!msg){inputEl.style.border='2px solid #e44';inputEl.placeholder='Por favor escreve a tua mensagem!';inputEl.focus();return;}
+if(msg.length>25){inputEl.style.border='2px solid #e44';return;}
+inputEl.style.border='1px solid #C4963A';
+var m=MEDALHAS[idx];
+var silverBtn=document.querySelector('.color-opt.sel-silver[data-idx="'+idx+'"]');
+var cor=silverBtn?'prateado':'dourado';
+var msgKey='P: '+msg;
+var existing=cart.find(function(c){return c.idx===idx&&c.nome===msgKey&&c.cor===cor;});
+if(existing){existing.qty++;}
+else{cart.push({idx:idx,nome:msgKey,cor:cor,mm:'personalizado',img:m.img,qty:1,preco:22});}
+updateCartBadge();
+var btn=document.getElementById('btn-'+idx);
+var orig=btn.textContent;
+btn.textContent='\u2713 Adicionado!';
+btn.style.background='#2C6B2F';btn.style.color='white';btn.style.borderColor='#2C6B2F';
+setTimeout(function(){btn.textContent=orig;btn.style.background='';btn.style.color='';btn.style.borderColor='';},1500);
 }
 ` + submitFn;
 if (!html.includes(submitFn)) { console.error('ERROR: submitEncomenda not found'); process.exit(1); }
@@ -80,17 +83,17 @@ console.log('3. addPersonalizado function added');
 const bodyClose = '<\/body>';
 const pricePatch = `<script>
 (function(){
-  var _orig=window.renderCartItems;
-  if(_orig)window.renderCartItems=function(){
-    _orig.call(this);
-    var items=document.querySelectorAll('.cart-item');
-    cart.forEach(function(item,i){
-      if(items[i]&&item.preco){var p=items[i].querySelector('.cart-item-price');if(p)p.textContent=item.preco+'\u20AC';}
-    });
-    var total=cart.reduce(function(s,it){return s+((it.preco||16)*it.qty);},0);
-    var els=document.querySelectorAll('*');
-    for(var i=0;i<els.length;i++){var el=els[i];if(!el.children.length&&el.textContent.trim().indexOf('Total:')===0){el.textContent='Total: '+total+'\u20AC';break;}}
-  };
+var _orig=window.renderCartItems;
+if(_orig)window.renderCartItems=function(){
+_orig.call(this);
+var items=document.querySelectorAll('.cart-item');
+cart.forEach(function(item,i){
+if(items[i]&&item.preco){var p=items[i].querySelector('.cart-item-price');if(p)p.textContent=item.preco+'\u20AC';}
+});
+var total=cart.reduce(function(s,it){return s+((it.preco||16)*it.qty);},0);
+var els=document.querySelectorAll('*');
+for(var i=0;i<els.length;i++){var el=els[i];if(!el.children.length&&el.textContent.trim().indexOf('Total:')===0){el.textContent='Total: '+total+'\u20AC';break;}}
+};
 })();
 <\/script>
 <\/body>`;
