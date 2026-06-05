@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt" id="htmlRoot">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -125,9 +125,11 @@ footer a{color:var(--gold);text-decoration:none}
 .cqty-val{font-size:.85rem;color:var(--dark);min-width:1.2rem;text-align:center}
 .cart-empty{text-align:center;padding:2rem;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--mid)}
 .cart-divider{height:.5px;background:#F0EDE8;margin:1rem 0}.frase-wrap{margin:.5rem 0;padding:.5rem 0}.frase-wrap label{display:block;font-size:.75rem;color:var(--dark);margin-bottom:.25rem;font-family:'Jost',sans-serif}.frase-input{width:100%;padding:.4rem .6rem;border:1px solid #D4AF8A;border-radius:4px;font-size:.85rem;font-family:'Jost',sans-serif;outline:none;box-sizing:border-box}.frase-input:focus{border-color:var(--gold)}.cart-item-frase{font-size:.75rem;color:var(--gold);font-style:italic;margin-top:.2rem}
+.lang-switch{position:fixed;top:.75rem;right:1rem;z-index:9999}.lang-switch button{background:var(--gold);color:#fff;border:none;border-radius:20px;padding:.3rem .85rem;font-size:.75rem;font-weight:700;letter-spacing:.08em;cursor:pointer;font-family:inherit}.lang-switch button:hover{opacity:.85}
 </style>
 </head>
 <body>
+<div class="lang-switch" id="langSwitch"><button onclick="toggleLang()" id="langBtn">EN</button></div>
 <div class="sparkles" id="sparkles"></div>
 <div class="hero">
   <div style="display:flex;flex-direction:column;align-items:center;">
@@ -145,40 +147,40 @@ footer a{color:var(--gold);text-decoration:none}
   <h1 class="hero-title">by <em>Luna</em><br>Blossom</h1>
   <p class="hero-sub">N&atilde;o &eacute; s&oacute; uma joia. &Eacute; uma declara&ccedil;&atilde;o.</p>
   <div class="hero-divider"><span>&#10022;</span></div>
-  <p class="hero-tag">Medalhas gravadas &middot; A&ccedil;o cor dourado &amp; prateado &middot; Envio gr&aacute;tis</p>
-  <a href="#catalogo" class="scroll-cta">Ver cole&ccedil;&atilde;o</a>
+  <p class="hero-tag" data-pt="jóias com intenção &middot; empowerment feminino" data-en="jewellery with intention &middot; female empowerment">Medalhas gravadas &middot; A&ccedil;o cor dourado &amp; prateado &middot; Envio gr&aacute;tis</p>
+  <a href="#catalogo" class="scroll-cta" data-pt="Ver coleção" data-en="View collection">Ver cole&ccedil;&atilde;o</a>
 </div>
 <section id="catalogo">
-  <p class="section-label fade-in">Cole&ccedil;&atilde;o</p>
-  <h2 class="section-title fade-in">Escolhe a tua<br><em>declara&ccedil;&atilde;o</em></h2>
+  <p class="section-label fade-in" data-pt="Coleção" data-en="Collection">Cole&ccedil;&atilde;o</p>
+  <h2 class="section-title fade-in" data-pt="Escolhe a tua &lt;br&gt;&lt;em&gt;declaração&lt;/em&gt;" data-en="Choose your &lt;br&gt;&lt;em&gt;statement&lt;/em&gt;">Escolhe a tua<br><em>declara&ccedil;&atilde;o</em></h2>
   <div class="cards" id="cards"></div>
 </section>
 <section>
-  <p class="section-label fade-in">Simples assim</p>
-  <h2 class="section-title fade-in">Como <em>encomendar</em></h2>
+  <p class="section-label fade-in" data-pt="Simples assim" data-en="Simple as that">Simples assim</p>
+  <h2 class="section-title fade-in" data-pt="Como &lt;em&gt;encomendar&lt;/em&gt;" data-en="How to &lt;em&gt;order&lt;/em&gt;">Como <em>encomendar</em></h2>
   <div class="steps">
-    <div class="step fade-in"><div class="step-num">1</div><div class="step-text"><h4>Escolhe a tua medalha</h4><p>Seleciona a mensagem e a cor. Clica em Encomendar.</p></div></div>
-    <div class="step fade-in"><div class="step-num">2</div><div class="step-text"><h4>Preenche os teus dados</h4><p>Nome, morada e contacto. Confirmamos tudo antes de enviar.</p></div></div>
-    <div class="step fade-in"><div class="step-num">3</div><div class="step-text"><h4>Pagamento seguro</h4><p>MBWay ou PayPal.</p></div></div>
-    <div class="step fade-in"><div class="step-num">4</div><div class="step-text"><h4>Recebe em casa</h4><p>Envio para todo Portugal. Gr&aacute;tis. Embalagem cuidada com muito amor.</p></div></div>
+    <div class="step fade-in"><div class="step-num">1</div><div class="step-text"><h4 data-pt="Escolhe a tua medalha" data-en="Choose your medal">Escolhe a tua medalha</h4><p data-pt="Seleciona a mensagem e a cor. Clica em Encomendar." data-en="Select the message and colour. Click Add.">Seleciona a mensagem e a cor. Clica em Encomendar.</p></div></div>
+    <div class="step fade-in"><div class="step-num">2</div><div class="step-text"><h4 data-pt="Preenche os teus dados" data-en="Fill in your details">Preenche os teus dados</h4><p data-pt="Nome, morada e contacto. Confirmamos tudo antes de enviar." data-en="Name, address and contact. We confirm everything before shipping.">Nome, morada e contacto. Confirmamos tudo antes de enviar.</p></div></div>
+    <div class="step fade-in"><div class="step-num">3</div><div class="step-text"><h4 data-pt="Pagamento seguro" data-en="Secure payment">Pagamento seguro</h4><p data-pt="MBWay ou PayPal." data-en="MBWay or PayPal.">MBWay ou PayPal.</p></div></div>
+    <div class="step fade-in"><div class="step-num">4</div><div class="step-text"><h4 data-pt="Recebe em casa" data-en="Delivered to your door">Recebe em casa</h4><p data-pt="Envio para todo Portugal. Grátis. Embalagem cuidada com muito amor." data-en="Shipping across Portugal. Free. Carefully packed with love.">Envio para todo Portugal. Gr&aacute;tis. Embalagem cuidada com muito amor.</p></div></div>
   </div>
 </section>
 <section>
   <div class="promise fade-in">
     <div class="promise-icon">&#10022;</div>
-    <h3>Cada joia &eacute; uma declara&ccedil;&atilde;o.</h3>
-    <p>Criadas em Portugal, com atitude. Porque uma mulher que sabe o que quer merece uma jóia que o diga em voz alta.</p>
+    <h3 data-pt="Cada joia é uma declaração." data-en="Every jewel is a statement.">Cada joia &eacute; uma declara&ccedil;&atilde;o.</h3>
+    <p data-pt="Criadas em Portugal, com atitude. Porque uma mulher que sabe o que quer merece uma jóia que o diga em voz alta." data-en="Made in Portugal, with attitude. Because a woman who knows what she wants deserves a jewel that says it out loud.">Criadas em Portugal, com atitude. Porque uma mulher que sabe o que quer merece uma jóia que o diga em voz alta.</p>
   </div>
 </section>
 <footer>
   <div class="footer-brand">by Luna Blossom</div>
-  <p>jóias com intenção &middot; empowerment feminino &middot; feitas em Portugal</p>
+  <p data-pt="jóias com intenção &middot; empowerment feminino &middot; feitas em Portugal" data-en="jewellery with intention &middot; female empowerment &middot; made in Portugal">jóias com intenção &middot; empowerment feminino &middot; feitas em Portugal</p>
   <p style="margin-top:.5rem"><a href="https://ig.me/m/by_luna_blossom" target="_blank">@by_luna_blossom</a></p>
 </footer>
 
 <!-- CARRINHO FAB -->
 <button class="cart-fab hidden" id="cartFab" onclick="openCart()">
-  🛒 Ver carrinho <span class="cart-badge" id="cartBadge">0</span>
+  🛒 <span data-pt="Ver carrinho" data-en="View cart">Ver carrinho</span> <span class="cart-badge" id="cartBadge">0</span>
 </button>
 
 <!-- MODAL -->
@@ -190,18 +192,18 @@ footer a{color:var(--gold);text-decoration:none}
       <div class="cart-items" id="cartItemsList"></div>
       <div class="cart-divider"></div>
       <div class="modal-total" id="cartTotal">Total: 0€</div>
-      <button class="btn-submit" id="btnCheckout" onclick="goToCheckout()">Finalizar encomenda →</button>
+      <button class="btn-submit" id="btnCheckout" onclick="goToCheckout()" data-pt="Finalizar encomenda →" data-en="Checkout →">Finalizar encomenda →</button>
     </div>
     <div id="stepForm" style="display:none">
       <div class="modal-form">
-        <div><label>Nome completo</label><input type="text" id="fNome" placeholder="O teu nome"><div class="error-msg" id="errNome"></div></div>
-        <div><label>Email</label><input type="email" id="fEmail" placeholder="O teu email"><div class="error-msg" id="errEmail"></div></div>
-        <div><label>Telefone</label><input type="tel" id="fTel" placeholder="+351 9XX XXX XXX"><div class="error-msg" id="errTel"></div></div>
-        <div><label>Morada completa (incluindo código postal)</label><input type="text" id="fMorada" placeholder="Rua, nº, andar, cidade, CP"><div class="error-msg" id="errMorada"></div></div>
-        <div><label>País de envio</label>
+        <div><label data-pt="Nome completo" data-en="Full name">Nome completo</label><input type="text" id="fNome" placeholder="O teu nome" data-pt-ph="O teu nome" data-en-ph="Your name"><div class="error-msg" id="errNome"></div></div>
+        <div><label data-pt="Email" data-en="Email">Email</label><input type="email" id="fEmail" placeholder="O teu email" data-pt-ph="O teu email" data-en-ph="Your email"><div class="error-msg" id="errEmail"></div></div>
+        <div><label data-pt="Telefone" data-en="Phone">Telefone</label><input type="tel" id="fTel" placeholder="+351 9XX XXX XXX" data-pt-ph="+351 9XX XXX XXX" data-en-ph="+351 9XX XXX XXX"><div class="error-msg" id="errTel"></div></div>
+        <div><label data-pt="Morada completa (incluindo código postal)" data-en="Full address (including postcode)">Morada completa (incluindo código postal)</label><input type="text" id="fMorada" placeholder="Rua, nº, andar, cidade, CP" data-pt-ph="Rua, nº, andar, cidade, CP" data-en-ph="Street, no., floor, city, postcode"><div class="error-msg" id="errMorada"></div></div>
+        <div><label data-pt="País de envio" data-en="Shipping country">País de envio</label>
           <select id="fPais" onchange="updateCartTotal()">
-            <option value="PT">Portugal (portes grátis)</option>
-            <option value="OUTRO">Fora de Portugal (+5€)</option>
+            <option value="PT" data-pt="Portugal (portes grátis)" data-en="Portugal (free shipping)">Portugal (portes grátis)</option>
+            <option value="OUTRO" data-pt="Fora de Portugal (+5€)" data-en="Outside Portugal (+5€)">Fora de Portugal (+5€)</option>
           </select>
         </div>
         <div class="modal-total" id="modalTotal">Total: 0€</div>
@@ -213,24 +215,24 @@ footer a{color:var(--gold);text-decoration:none}
 
 
           <span>
-             Li e aceito os
+             <span data-pt="Li e aceito os" data-en="I have read and accept the">Li e aceito os</span>
              <a href="privacidade.html" target="_blank"
-             style="color:#C4963A;text-decoration:underline;">
+             style="color:#C4963A;text-decoration:underline;" data-pt="Termos e Condições" data-en="Terms and Conditions">
                Termos e Condições
              </a>
           </span>
 
         </label>
       </div>
-        <button class="btn-submit" id="btnSubmit" onclick="submitEncomenda()">Confirmar encomenda →</button>
+        <button class="btn-submit" id="btnSubmit" onclick="submitEncomenda()" data-pt="Confirmar encomenda →" data-en="Confirm order →">Confirmar encomenda →</button>
       </div>
     </div>
     <div class="modal-success" id="stepSuccess" style="display:none">
       <img src="logo-new.png" alt="by Luna Blossom"
         style="width:100px;margin:0 auto 0.5rem;display:block;">
-      <h3>Encomenda recebida!</h3>
+      <h3 data-pt="Encomenda recebida!" data-en="Order received!">Encomenda recebida!</h3>
       
-      <p style="margin-top:1rem">Vais receber um email com os dados de pagamento em breve.<br>Qualquer dúvida fala connosco no <a href="https://ig.me/m/by_luna_blossom" target="_blank" style="color:var(--gold)">@by_luna_blossom</a></p>
+      <p style="margin-top:1rem"><span data-pt="Vais receber um email com os dados de pagamento em breve." data-en="You will receive an email with payment details shortly.">Vais receber um email com os dados de pagamento em breve.</span><br><span data-pt="Qualquer dúvida fala connosco no" data-en="Any questions? Reach us on">Qualquer dúvida fala connosco no</span> <a href="https://ig.me/m/by_luna_blossom" target="_blank" style="color:var(--gold)">@by_luna_blossom</a></p>
     </div>
   </div>
 </div>
@@ -275,15 +277,15 @@ card.innerHTML =
   +'<div class="card-body">'
   +'<div class="card-size-tag">Medalha '+(m.mm==="personalizado"?"20mm":m.mm)+' - Aço</div>'
   +'<div class="card-name">'+m.nome+'</div>'
-  +'<div class="card-desc">'+m.desc+'</div>'+(m.mm==="personalizado"?'<div class="frase-wrap"><label>Frase (máx. 25 caracteres):</label><input type="text" id="frase-'+i+'" maxlength="25" placeholder="A tua frase..." class="frase-input"></div>':'')
+  +'<div class="card-desc">'+m.desc+'</div>'+(m.mm==="personalizado"?'<div class="frase-wrap"><label>'+t('Frase (máx. 25 caracteres):')+'</label><input type="text" id="frase-'+i+'" maxlength="25" placeholder="'+t('A tua frase...')+'" class="frase-input"></div>':'')
   +'<div class="color-selector"><span class="color-label">Escolhe a cor</span>'
   +'<div class="color-options">'
-  +'<button class="color-opt sel-gold" data-color="dourado" data-idx="'+i+'" onclick="selectColor(this)"><span class="dot dot-g"></span> Cor dourado</button>'
-  +'<button class="color-opt" data-color="prateado" data-idx="'+i+'" onclick="selectColor(this)"><span class="dot dot-s"></span> Cor prateado</button>'
+  +'<button class="color-opt sel-gold" data-color="dourado" data-idx="'+i+'" onclick="selectColor(this)"><span class="dot dot-g"></span> '+t('Cor dourado')+'</button>'
+  +'<button class="color-opt" data-color="prateado" data-idx="'+i+'" onclick="selectColor(this)"><span class="dot dot-s"></span> '+t('Cor prateado')+'</button>'
   +'</div></div>'
   +'<div class="card-footer">'
-  +'<div class="card-meta"><span class="card-price">'+precoCard+'</span><span class="card-ship">✦ Envio gratis</span></div>'
-  +'<button class="btn-add" onclick="addToCart('+i+')" id="btn-'+i+'">+ Adicionar</button>'
+  +'<div class="card-meta"><span class="card-price">'+precoCard+'</span><span class="card-ship">'+t('✦ Envio gratis')+'</span></div>'
+  +'<button class="btn-add" onclick="addToCart('+i+')" id="btn-'+i+'">'+t('+ Adicionar')+'</button>'
   +'</div></div>';
     container.appendChild(card);
     });
@@ -338,7 +340,7 @@ function openCart(){
 function renderCartItems(){
   var list=document.getElementById('cartItemsList');
   if(cart.length===0){
-    list.innerHTML='<div class="cart-empty">O teu carrinho está vazio</div>';
+    list.innerHTML='<div class="cart-empty">'+t('O teu carrinho está vazio')+'</div>';
     document.getElementById('btnCheckout').style.display='none';
     return;
   }
@@ -379,7 +381,7 @@ function updateCartTotal(){
   var subtotal=cart.reduce(function(s,i){return s+i.qty*i.preco;},0);
   var portes=pais==='PT'?0:5;
   var total=subtotal+portes;
-  var el=document.getElementById('cartTotal');if(el)el.textContent='Total: '+total+'€';
+  var el=document.getElementById('cartTotal');if(el)el.textContent=t('Total: ')+total+'€';
   var el2=document.getElementById('modalTotal');if(el2)el2.textContent='Total: '+total+'€';
 }
 
@@ -387,7 +389,7 @@ function goToCheckout(){
   if(cart.length===0)return;
   document.getElementById('stepCart').style.display='none';
   document.getElementById('stepForm').style.display='block';
-  document.getElementById('modalTitle').textContent='Os teus dados';
+  document.getElementById('modalTitle').textContent=t('Os teus dados');
   updateCartTotal();
 }
 
@@ -402,21 +404,21 @@ function closeModalOutside(e){
 
 function validateForm(){
   var ok=true;
-  var fields=[{id:'fNome',err:'errNome',msg:'Nome obrigatório'},{id:'fEmail',err:'errEmail',msg:'Email obrigatório'},{id:'fTel',err:'errTel',msg:'Telefone obrigatório'},{id:'fMorada',err:'errMorada',msg:'Morada obrigatória'}];
+  var fields=[{id:'fNome',err:'errNome',msg:t('Nome obrigatório')},{id:'fEmail',err:'errEmail',msg:t('Email obrigatório')},{id:'fTel',err:'errTel',msg:t('Telefone obrigatório')},{id:'fMorada',err:'errMorada',msg:t('Morada obrigatória')}];
   fields.forEach(function(f){
     var el=document.getElementById(f.id);
     if(!el.value.trim()){document.getElementById(f.err).textContent=f.msg;el.classList.add('field-error');ok=false;}
     else{document.getElementById(f.err).textContent='';el.classList.remove('field-error');}
   });
   var email=document.getElementById('fEmail').value;
-  if(email&&!/^[^@]+@[^@]+[.][^@]+$/.test(email)){document.getElementById('errEmail').textContent='Email inválido';document.getElementById('fEmail').classList.add('field-error');ok=false;}
+  if(email&&!/^[^@]+@[^@]+[.][^@]+$/.test(email)){document.getElementById('errEmail').textContent=t('Email inválido');document.getElementById('fEmail').classList.add('field-error');ok=false;}
   return ok;
 }
 
 function submitEncomenda(){
   if(!validateForm())return;
   var btn=document.getElementById('btnSubmit');
-  btn.disabled=true;btn.textContent='A processar...';
+  btn.disabled=true;btn.textContent=t('A processar...');
   var pais=document.getElementById('fPais').value;
   var payload={
     nome:document.getElementById('fNome').value.trim(),
@@ -424,11 +426,12 @@ function submitEncomenda(){
     telefone:document.getElementById('fTel').value.trim(),
     morada:document.getElementById('fMorada').value.trim(),
     pais:pais,
+    lang:LANG,
     items:cart.map(function(i){return {medalha:(i.mm==='personalizado'&&i.frase?'P '+i.frase:i.nome),referencia:i.mm,cor:i.cor,quantidade:i.qty};})
   };
   fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify(payload),mode:'no-cors'})
   .then(function(){
-    btn.disabled=false;btn.textContent='Confirmar encomenda →';
+    btn.disabled=false;btn.textContent=t('Confirmar encomenda →');
       document.getElementById('stepForm').style.display='none';
       document.getElementById('stepSuccess').style.display='block';
       document.getElementById('modalTitle').textContent='Obrigada!';
@@ -436,7 +439,7 @@ function submitEncomenda(){
   })
   .catch(function(){
     btn.disabled=false;btn.textContent='Confirmar encomenda →';
-    alert('Erro de ligação. Verifica a tua internet e tenta novamente.');
+    alert(t('Erro de ligação. Verifica a tua internet e tenta novamente.'));
   });
 }
 
@@ -450,6 +453,51 @@ var obs=new IntersectionObserver(function(entries){
   entries.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add('visible');},i*60);});
 },{threshold:.1});
 document.querySelectorAll('.fade-in').forEach(function(el){obs.observe(el);});
+
+// ---- LANGUAGE TOGGLE ----
+var LANG = localStorage.getItem('blLang') || 'pt';
+
+var TR = {
+  'Frase (máx. 25 caracteres):':'Phrase (max. 25 characters):',
+  'A tua frase...':'Your phrase...',
+  'Cor dourado':'Gold colour',
+  'Cor prateado':'Silver colour',
+  '✦ Envio gratis':'✦ Free shipping',
+  '+ Adicionar':'+ Add',
+  'O teu carrinho está vazio':'Your cart is empty',
+  'Total: ':'Total: ',
+  'Os teus dados':'Your details',
+  'A processar...':'Processing...',
+  'Confirmar encomenda →':'Confirm order →',
+  'Nome obrigatório':'Name required',
+  'Email obrigatório':'Email required',
+  'Telefone obrigatório':'Phone required',
+  'Morada obrigatória':'Address required',
+  'Email inválido':'Invalid email',
+  'Erro de ligação. Verifica a tua internet e tenta novamente.':'Connection error. Check your internet and try again.'
+};
+
+function t(s){ return LANG==='en'&&TR[s]?TR[s]:s; }
+
+function applyLang(){
+  document.getElementById('htmlRoot').lang=LANG;
+  document.getElementById('langBtn').textContent=LANG==='pt'?'EN':'PT';
+  document.querySelectorAll('[data-pt]').forEach(function(el){
+    var v=LANG==='pt'?el.getAttribute('data-pt'):el.getAttribute('data-en');
+    if(v)el.innerHTML=v;
+  });
+  document.querySelectorAll('[data-pt-ph]').forEach(function(el){
+    el.placeholder=LANG==='pt'?el.getAttribute('data-pt-ph'):el.getAttribute('data-en-ph');
+  });
+}
+
+function toggleLang(){
+  LANG=LANG==='pt'?'en':'pt';
+  localStorage.setItem('blLang',LANG);
+  applyLang();
+}
+
+applyLang();
 </script>
 </body>
 </html>
