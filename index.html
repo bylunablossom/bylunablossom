@@ -127,9 +127,8 @@ footer a{color:var(--gold);text-decoration:none}
 .cart-divider{height:.5px;background:#F0EDE8;margin:1rem 0}.frase-wrap{margin:.5rem 0;padding:.5rem 0}.frase-wrap label{display:block;font-size:.75rem;color:var(--dark);margin-bottom:.25rem;font-family:'Jost',sans-serif}.frase-input{width:100%;padding:.4rem .6rem;border:1px solid #D4AF8A;border-radius:4px;font-size:.85rem;font-family:'Jost',sans-serif;outline:none;box-sizing:border-box}.frase-input:focus{border-color:var(--gold)}.cart-item-frase{font-size:.75rem;color:var(--gold);font-style:italic;margin-top:.2rem}
 #lang-switcher{position:fixed;top:12px;right:16px;z-index:9999}#lang-btn{background:linear-gradient(135deg,#b8960c,#f0d060,#b8960c);color:#3a2a00;border:2px solid #b8960c;border-radius:20px;padding:6px 16px;font-family:'cormorant garamond',serif;font-size:.85rem;font-weight:700;letter-spacing:.08em;cursor:pointer;box-shadow:0 2px 8px rgba(184,150,12,.35);transition:all .25s}#lang-btn:hover{background:linear-gradient(135deg,#f0d060,#b8960c,#f0d060);box-shadow:0 4px 14px rgba(184,150,12,.55);transform:translatey(-1px)}</style>
 </head>
-<body><div id="lang-switcher"><button id="lang-btn" onclick="togglelang()" aria-label="switch language">&#127760; pt | en</button></div>
-      <p class="hero-sub"><span data-pt="Não é só uma joia. É uma declaração." data-en="Not just a jewel. A statement.">Não é só uma joia. É
-<div class="hero">
+<body><div id="lang-switcher"><button id="lang-btn" onclick="toggleLang()" aria-label="switch language">&#127760; PT | EN</button></div>>
+      <div class="sparkles" id="sparkles"></div><div class="hero">
   <div style="display:flex;flex-direction:column;align-items:center;">
 
   <img src="logo-new.png"
@@ -450,7 +449,7 @@ var obs=new IntersectionObserver(function(entries){
   entries.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add('visible');},i*60);});
 },{threshold:.1});
 document.querySelectorAll('.fade-in').forEach(function(el){obs.observe(el);});
-function toggleLang(){var cur=document.documentElement.getAttribute('data-lang')||'pt';var next=cur==='pt'?'en':'pt';document.documentElement.setAttribute('data-lang',next);var btn=document.getElementById('lang-btn');if(btn)btn.innerHTML=next==='en'?'&#127760; EN | PT':'&#127760; PT | EN';document.querySelectorAll('[data-pt]').forEach(function(el){el.textContent=next==='en'?el.getAttribute('data-en'):el.getAttribute('data-pt');});}
+function toggleLang()(){var cur=document.documentElement.getAttribute('data-lang')||'pt';var next=cur==='pt'?'en':'pt';document.documentElement.setAttribute('data-lang',next);var btn=document.getElementById('lang-btn');if(btn)btn.innerHTML=next==='en'?'&#127760; EN | PT':'&#127760; PT | EN';document.querySelectorAll('[data-pt]').forEach(function(el){el.textContent=next==='en'?el.getAttribute('data-en'):el.getAttribute('data-pt');});}
 </script>
 </body>
 </html>
