@@ -271,22 +271,26 @@ MEDALHAS.forEach(function(m,i){
     '16€';
 
 card.innerHTML =
-  '<div class="card-img-wrap">'+imgHtml+(m.mm==="personalizado"?'<div class="card-badge-personalizado">&#9733; PERSONALIZADO</div>':'')+`'</div>'`
+  '<div class="card-img-wrap">'+imgHtml+(m.mm==="personalizado"?'<div class="card-badge-personalizado">&#9733; CUSTOM</div>':'')+'</div>'
   +'<div class="card-body">'
-  +'<div class="card-size-tag">Medalha '+(m.mm==="personalizado"?"20mm":m.mm)+' - Aço</div>'
+  +'<div class="card-size-tag">Pendant '+(m.mm==="personalizado"?"20mm":m.mm)+' - Stainless Steel</div>'
   +'<div class="card-name">'+m.nome+'</div>'
-  +'<div class="card-desc">'+m.desc+'</div>'+(m.mm==="personalizado"?'<div class="frase-wrap"><label>Frase (máx. 25 caracteres):</label><input type="text" id="frase-'+i+'" maxlength="25" placeholder="A tua frase..." class="frase-input"></div>':'')
-  +'<div class="color-selector"><span class="color-label">Escolhe a cor</span>'
+  +'<div class="card-desc">'+m.desc+'</div>'
+  +(m.mm==="personalizado"
+    ?'<div class="frase-wrap"><label>Phrase (max 25 characters):</label><input type="text" id="frase-'+i+'" maxlength="25" placeholder="Your phrase..." class="frase-input"></div>'
+    :'')
+  +'<div class="color-selector"><span class="color-label">Choose color</span>'
   +'<div class="color-options">'
-  +'<button class="color-opt sel-gold" data-color="dourado" data-idx="'+i+'" onclick="selectColor(this)"><span class="dot dot-g"></span> Cor dourado</button>'
-  +'<button class="color-opt" data-color="prateado" data-idx="'+i+'" onclick="selectColor(this)"><span class="dot dot-s"></span> Cor prateado</button>'
+  +'<button class="color-opt sel-gold" data-color="dourado" data-idx="'+i+'" onclick="selectColor(this)"><span class="dot dot-g"></span> Gold</button>'
+  +'<button class="color-opt" data-color="prateado" data-idx="'+i+'" onclick="selectColor(this)"><span class="dot dot-s"></span> Silver</button>'
   +'</div></div>'
   +'<div class="card-footer">'
-  +'<div class="card-meta"><span class="card-price">'+precoCard+'</span><span class="card-ship">✦ Envio gratis</span></div>'
-  +'<button class="btn-add" onclick="addToCart('+i+')" id="btn-'+i+'">+ Adicionar</button>'
+  +'<div class="card-meta"><span class="card-price">'+precoCard+'</span><span class="card-ship">✦ Free shipping</span></div>'
+  +'<button class="btn-add" onclick="addToCart('+i+')" id="btn-'+i+'">+ Add</button>'
   +'</div></div>';
     container.appendChild(card);
     });
+
 
 function selectColor(btn){
   var opts=btn.closest('.color-options').querySelectorAll('.color-opt');
@@ -312,8 +316,8 @@ function addToCart(idx){
   else{cart.push({idx:idx,nome:m.nome,cor:cor,mm:m.mm,img:m.img,qty:1,frase:(m.mm==='personalizado'?(document.getElementById('frase-'+idx)||{value:''}).value.trim().substring(0,25):''),preco:m.mm==='15mm'?13:m.mm==='personalizado'?22:16});}
   updateCartBadge();
   var btn=document.getElementById('btn-'+idx);
-  btn.classList.add('added');btn.textContent='✓ Adicionado';
-  setTimeout(function(){btn.classList.remove('added');btn.textContent='+ Adicionar';},1500);
+  btn.classList.add('added');btn.textContent='✓ Added';
+  setTimeout(function(){btn.classList.remove('added');btn.textContent='+ Add';},1500);
 }
 
 function updateCartBadge(){
@@ -330,7 +334,7 @@ function openCart(){
   document.getElementById('stepCart').style.display='block';
   document.getElementById('stepForm').style.display='none';
   document.getElementById('stepSuccess').style.display='none';
-  document.getElementById('modalTitle').textContent='O teu carrinho';
+  document.getElementById('modalTitle').textContent='Your Cart';
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
@@ -338,31 +342,31 @@ function openCart(){
 function renderCartItems(){
   var list=document.getElementById('cartItemsList');
   if(cart.length===0){
-    list.innerHTML='<div class="cart-empty">O teu carrinho está vazio</div>';
+    list.innerHTML='<div class="cart-empty">Your cart is empty</div>';
     document.getElementById('btnCheckout').style.display='none';
     return;
   }
   document.getElementById('btnCheckout').style.display='block';
   list.innerHTML='';
   cart.forEach(function(item,i){
-    var div=document.createElement('div');div.className='cart-item';
-    var imgHtml=item.img&&item.img.length>0?'<img class="cart-item-img" src="'+item.img+'" alt="">':'<div class="cart-item-img-ph">'+item.nome+'</div>';
-    var corLabel=item.cor==='dourado'?'Cor dourado':'Cor prateado';
-    div.innerHTML=imgHtml
-      +'<div class="cart-item-info">'
-      +'<div class="cart-item-name">'+item.nome+'</div>'
-      +'<div class="cart-item-meta">'+corLabel+' · '+item.mm+'</div>'+(item.frase?'<div class="cart-item-frase">"'+item.frase+'"</div>':'')
-      +'<div class="cqty-wrap">'
-      +'<button class="cqty-btn" onclick="changeCartQty('+i+',-1)">−</button>'
-      +'<span class="cqty-val" id="cqty-'+i+'">'+item.qty+'</span>'
-      +'<button class="cqty-btn" onclick="changeCartQty('+i+',1)">+</button>'
-      +'</div></div>'
-      +'<div class="cart-item-right">'
-      +'<span class="cart-item-price">'+(item.qty*item.preco)+'€</span>'
-      +'<button class="cart-item-remove" onclick="removeFromCart('+i+')" title="Remover">✕</button>'
-      +'</div>';
-    list.appendChild(div);
-  });
+  var div=document.createElement('div');div.className='cart-item';
+  var imgHtml=item.img&&item.img.length>0?'<img class="cart-item-img" src="'+item.img+'" alt="">':'<div class="cart-item-img-ph">'+item.nome+'</div>';
+  var corLabel=item.cor==='dourado'?'Gold':'Silver';
+  div.innerHTML=imgHtml
+    +'<div class="cart-item-info">'
+    +'<div class="cart-item-name">'+item.nome+'</div>'
+    +'<div class="cart-item-meta">'+corLabel+' · '+item.mm+'</div>'+(item.frase?'<div class="cart-item-frase">"'+item.frase+'"</div>':'')
+    +'<div class="cqty-wrap">'
+    +'<button class="cqty-btn" onclick="changeCartQty('+i+',-1)">−</button>'
+    +'<span class="cqty-val" id="cqty-'+i+'">'+item.qty+'</span>'
+    +'<button class="cqty-btn" onclick="changeCartQty('+i+',1)">+</button>'
+    +'</div></div>'
+    +'<div class="cart-item-right">'
+    +'<span class="cart-item-price">'+(item.qty*item.preco)+'€</span>'
+    +'<button class="cart-item-remove" onclick="removeFromCart('+i+')" title="Remove">✕</button>'
+    +'</div>';
+  list.appendChild(div);
+});
 }
 
 function changeCartQty(i,delta){
@@ -387,7 +391,7 @@ function goToCheckout(){
   if(cart.length===0)return;
   document.getElementById('stepCart').style.display='none';
   document.getElementById('stepForm').style.display='block';
-  document.getElementById('modalTitle').textContent='Os teus dados';
+  document.getElementById('modalTitle').textContent='Your details';
   updateCartTotal();
 }
 
@@ -402,54 +406,101 @@ function closeModalOutside(e){
 
 function validateForm(){
   var ok=true;
-  var fields=[{id:'fNome',err:'errNome',msg:'Nome obrigatório'},{id:'fEmail',err:'errEmail',msg:'Email obrigatório'},{id:'fTel',err:'errTel',msg:'Telefone obrigatório'},{id:'fMorada',err:'errMorada',msg:'Morada obrigatória'}];
+  var fields=[
+    {id:'fNome',err:'errNome',msg:'Name required'},
+    {id:'fEmail',err:'errEmail',msg:'Email required'},
+    {id:'fTel',err:'errTel',msg:'Phone required'},
+    {id:'fMorada',err:'errMorada',msg:'Address required'}
+  ];
+
   fields.forEach(function(f){
     var el=document.getElementById(f.id);
-    if(!el.value.trim()){document.getElementById(f.err).textContent=f.msg;el.classList.add('field-error');ok=false;}
-    else{document.getElementById(f.err).textContent='';el.classList.remove('field-error');}
+    if(!el.value.trim()){
+      document.getElementById(f.err).textContent=f.msg;
+      el.classList.add('field-error');
+      ok=false;
+    } else {
+      document.getElementById(f.err).textContent='';
+      el.classList.remove('field-error');
+    }
   });
+
   var email=document.getElementById('fEmail').value;
-  if(email&&!/^[^@]+@[^@]+[.][^@]+$/.test(email)){document.getElementById('errEmail').textContent='Email inválido';document.getElementById('fEmail').classList.add('field-error');ok=false;}
+  if(email && !/^[^@]+@[^@]+[.][^@]+$/.test(email)){
+    document.getElementById('errEmail').textContent='Invalid email';
+    document.getElementById('fEmail').classList.add('field-error');
+    ok=false;
+  }
+
   return ok;
 }
 
 function submitEncomenda(){
-  if(!validateForm())return;
+  if(!validateForm()) return;
+
   var btn=document.getElementById('btnSubmit');
-  btn.disabled=true;btn.textContent='A processar...';
+  btn.disabled=true;
+  btn.textContent='Processing...';
+
   var pais=document.getElementById('fPais').value;
+
   var payload={
     nome:document.getElementById('fNome').value.trim(),
     email:document.getElementById('fEmail').value.trim(),
     telefone:document.getElementById('fTel').value.trim(),
     morada:document.getElementById('fMorada').value.trim(),
     pais:pais,
-    items:cart.map(function(i){return {medalha:(i.mm==='personalizado'&&i.frase?'P '+i.frase:i.nome),referencia:i.mm,cor:i.cor,quantidade:i.qty};})
+    items:cart.map(function(i){
+      return {
+        medalha:(i.mm==='personalizado'&&i.frase ? 'Custom ' + i.frase : i.nome),
+        referencia:i.mm,
+        cor:i.cor,
+        quantidade:i.qty
+      };
+    })
   };
+
   fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify(payload),mode:'no-cors'})
   .then(function(){
-    btn.disabled=false;btn.textContent='Confirmar encomenda →';
-      document.getElementById('stepForm').style.display='none';
-      document.getElementById('stepSuccess').style.display='block';
-      document.getElementById('modalTitle').textContent='Obrigada!';
-      cart=[];updateCartBadge();
+    btn.disabled=false;
+    btn.textContent='Confirm order →';
+
+    document.getElementById('stepForm').style.display='none';
+    document.getElementById('stepSuccess').style.display='block';
+    document.getElementById('modalTitle').textContent='Thank you!';
+
+    cart=[];
+    updateCartBadge();
   })
   .catch(function(){
-    btn.disabled=false;btn.textContent='Confirmar encomenda →';
-    alert('Erro de ligação. Verifica a tua internet e tenta novamente.');
+    btn.disabled=false;
+    btn.textContent='Confirm order →';
+    alert('Connection error. Check your internet and try again.');
   });
 }
 
 var sc=document.getElementById('sparkles');
 for(var j=0;j<18;j++){
-  var s=document.createElement('div');s.className='sparkle';
-  s.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;--d:'+(2+Math.random()*3)+'s;--delay:'+Math.random()*4+'s;';
+  var s=document.createElement('div');
+  s.className='sparkle';
+  s.style.cssText=
+    'left:'+Math.random()*100+'%;top:'+Math.random()*100+
+    '%;--d:'+(2+Math.random()*3)+'s;--delay:'+Math.random()*4+'s;';
   sc.appendChild(s);
 }
+
 var obs=new IntersectionObserver(function(entries){
-  entries.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add('visible');},i*60);});
+  entries.forEach(function(e,i){
+    if(e.isIntersecting)
+      setTimeout(function(){
+        e.target.classList.add('visible');
+      },i*60);
+  });
 },{threshold:.1});
-document.querySelectorAll('.fade-in').forEach(function(el){obs.observe(el);});
+
+document.querySelectorAll('.fade-in').forEach(function(el){
+  obs.observe(el);
+});
 </script>
 </body>
 </html>
