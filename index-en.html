@@ -451,6 +451,7 @@ function submitEncomenda(){
     telefone:document.getElementById('fTel').value.trim(),
     morada:document.getElementById('fMorada').value.trim(),
     pais:pais,
+    lang:'en',
     items:cart.map(function(i){
       return {
         medalha:(i.mm==='personalizado'&&i.frase ? 'Custom ' + i.frase : i.nome),
