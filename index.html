@@ -274,7 +274,7 @@ MEDALHAS.forEach(function(m,i){
     '16€';
 
 card.innerHTML =
-  '<div class="card-img-wrap">'+imgHtml+(m.mm==="personalizado"?'<div class="card-badge-personalizado">&#9733; PERSONALIZADO</div>':'')+`'</div>'`
+  '<div class="card-img-wrap">'+imgHtml+(m.mm==="personalizado"?'<div class="card-badge-personalizado">&#9733; PERSONALIZADO</div>':'')+'</div>'
   +'<div class="card-body">'
   +'<div class="card-size-tag">Medalha '+(m.mm==="personalizado"?"20mm":m.mm)+' - Aço</div>'
   +'<div class="card-name">'+m.nome+'</div>'
