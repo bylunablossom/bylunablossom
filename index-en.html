@@ -454,7 +454,7 @@ function submitEncomenda(){
     lang:'en',
     items:cart.map(function(i){
       return {
-        medalha:(i.mm==='personalizado'&&i.frase ? 'P' + i.frase : i.nome),
+        medalha:(i.mm==='personalizado'&&i.frase ? 'P ' + i.frase : i.nome),
         referencia:i.mm,
         cor:i.cor,
         quantidade:i.qty
