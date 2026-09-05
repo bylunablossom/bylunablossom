@@ -533,7 +533,7 @@ function submitEncomenda(){
     morada:document.getElementById('fMorada').value.trim(),
     pais:pais,
     lang:'en',
-    items:cart.map(function(i){return {medalha:(i.mm==='personalizado'&&i.frase?'P '+i.frase:i.nome),referencia:i.mm,cor:i.cor,quantidade:i.qty,coleccao:i.colecao};})
+    items:cart.map(function(i){return {medalha:(i.mm==='personalizado'&&i.frase?'P '+i.frase:i.nome),referencia:i.mm,cor:i.cor,quantidade:i.qty,coleccao:i.colecao,preco:i.preco,precoTotal:i.preco*i.qty};})
   };
   fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify(payload),mode:'no-cors'})
   .then(function(){
