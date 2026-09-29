@@ -169,10 +169,14 @@ t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1992763961348905');
+fbq('init', '2581867338882576');
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1992763961348905&ev=PageView&noscript=1"
+/></noscript>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2581867338882576&ev=PageView&noscript=1"
 /></noscript>
 
 <!-- Google Analytics -->
@@ -214,10 +218,10 @@ gtag('config', 'G-BWWQVHYHL6');
   <p class="section-label fade-in">Simples assim</p>
   <h2 class="section-title fade-in">Como <em>encomendar</em></h2>
   <div class="steps">
-    <div class="step fade-in"><div class="step-num">1</div><div class="step-text"><h4>Escolhe a tua medalha</h4><p>Seleciona a mensagem e a cor. Clica em Encomendar.</p></div></div>
-    <div class="step fade-in"><div class="step-num">2</div><div class="step-text"><h4>Preenche os teus dados</h4><p>Nome, morada e contacto. Confirmamos tudo antes de enviar.</p></div></div>
-    <div class="step fade-in"><div class="step-num">3</div><div class="step-text"><h4>Pagamento seguro</h4><p>MBWay ou PayPal.</p></div></div>
-    <div class="step fade-in"><div class="step-num">4</div><div class="step-text"><h4>Recebe em casa</h4><p>Envio para todo Portugal. Gr&aacute;tis. Embalagem cuidada com muito amor.</p></div></div>
+    <div class="step fade-in"><div class="step-num">1</div><div class="step-text"><h4>Escolhe a tua medalha</h4><p>Escolhe a mensagem e a cor. Adiciona ao carrinho e clica em &ldquo;Finalizar encomenda&rdquo;.</p></div></div>
+    <div class="step fade-in"><div class="step-num">2</div><div class="step-text"><h4>Confirma a encomenda</h4><p>Preenche os teus dados de contacto e entrega e confirma o pedido.</p></div></div>
+    <div class="step fade-in"><div class="step-num">3</div><div class="step-text"><h4>Recebe as instru&ccedil;&otilde;es de pagamento</h4><p>Enviamos por e-mail o resumo e os dados para pagar por MB WAY ou PayPal. Ap&oacute;s confirma&ccedil;&atilde;o do pagamento, come&ccedil;amos a preparar a tua pe&ccedil;a.</p></div></div>
+    <div class="step fade-in"><div class="step-num">4</div><div class="step-text"><h4>Recebe em casa</h4><p>Avisamos por e-mail quando a encomenda for enviada. Envio gr&aacute;tis para Portugal. Embalagem cuidada com muito amor.</p></div></div>
   </div>
 </section>
 <section>
@@ -275,6 +279,7 @@ gtag('config', 'G-BWWQVHYHL6');
         </label>
       </div>
         <button class="btn-submit" id="btnSubmit" onclick="submitEncomenda()">Confirmar encomenda →</button>
+        <p style="text-align:center;font-size:0.8rem;color:#888;margin-top:0.6rem;">Os dados de pagamento serão enviados por email após a confirmação da encomenda.</p>
       </div>
     </div>
     <div class="modal-success" id="stepSuccess" style="display:none">
@@ -360,6 +365,12 @@ var COLLECTIONS=[
 ]}
   ,{key:'sons-da-revolucao',name:'Sons da Revolu&ccedil;&atilde;o',tag:'Cole&ccedil;&atilde;o &middot; Brevemente',status:'soon',
     teaser:'Uma nova coleção está a chegar. Sons da Revolução — em breve.',
+    priceFn:function(m){return 16;}, items:[]}
+  ,{key:'blossom',name:'Blossom',tag:'Cole&ccedil;&atilde;o &middot; Uma flor por m&ecirc;s',status:'soon',
+    teaser:'Doze medalhas, uma flor para cada m&ecirc;s do ano. A chegar em breve.',
+    priceFn:function(m){return 16;}, items:[]}
+  ,{key:'luna',name:'Luna',tag:'Cole&ccedil;&atilde;o &middot; Uma constela&ccedil;&atilde;o por signo',status:'soon',
+    teaser:'Doze medalhas, a constela&ccedil;&atilde;o de cada signo do zod&iacute;aco. A chegar em breve.',
     priceFn:function(m){return 16;}, items:[]}
 ];
 
