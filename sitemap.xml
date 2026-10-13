@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Loja (português) -->
+  <url>
+    <loc>https://bylunablossom.github.io/bylunablossom/</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://bylunablossom.github.io/bylunablossom/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bylunablossom.github.io/bylunablossom/index-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bylunablossom.github.io/bylunablossom/"/>
+  </url>
+
+  <!-- Loja (inglês) -->
+  <url>
+    <loc>https://bylunablossom.github.io/bylunablossom/index-en.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://bylunablossom.github.io/bylunablossom/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bylunablossom.github.io/bylunablossom/index-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bylunablossom.github.io/bylunablossom/"/>
+  </url>
+
+  <!-- Privacidade, termos e devoluções (português) -->
+  <url>
+    <loc>https://bylunablossom.github.io/bylunablossom/privacidade.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://bylunablossom.github.io/bylunablossom/privacidade.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bylunablossom.github.io/bylunablossom/privacidade-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bylunablossom.github.io/bylunablossom/privacidade.html"/>
+  </url>
+
+  <!-- Privacidade, termos e devoluções (inglês) -->
+  <url>
+    <loc>https://bylunablossom.github.io/bylunablossom/privacidade-en.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://bylunablossom.github.io/bylunablossom/privacidade.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bylunablossom.github.io/bylunablossom/privacidade-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bylunablossom.github.io/bylunablossom/privacidade.html"/>
+  </url>
+
+</urlset>
