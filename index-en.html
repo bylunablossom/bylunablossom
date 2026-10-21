@@ -446,6 +446,150 @@ var COLLECTIONS=[
 ]}
 ];
 
+// Gold photos for the Luna collection (external files for GitHub Pages).
+var LUNA_GOLD_IMAGES=[
+  'luna-carneiro-dourado.png',
+  'luna-touro-dourado.png',
+  'luna-gemeos-dourado.png',
+  'luna-caranguejo-dourado.png',
+  'luna-leao-dourado.png',
+  'luna-virgem-dourado.png',
+  'luna-libra-dourado.png',
+  'luna-escorpiao-dourado.png',
+  'luna-sagitario-dourado.png',
+  'luna-capricornio-dourado.png',
+  'luna-aquario-dourado.png',
+  'luna-peixes-dourado.png'
+];
+COLLECTIONS.forEach(function(collection){
+  if(collection.key==='luna'){
+    collection.items.forEach(function(medal,index){medal.imgGold=LUNA_GOLD_IMAGES[index];});
+  }
+});
+
+// Silver photos for the Blossom collection (January to December order).
+var BLOSSOM_SILVER_IMAGES=[
+  'blossom-janeiro-cravo-prateado.png',
+  'blossom-fevereiro-violeta-prateado.png',
+  'blossom-marco-narciso-prateado.png',
+  'blossom-abril-margarida-prateado.png',
+  'blossom-maio-lirio-do-vale-prateado.png',
+  'blossom-junho-rosa-prateado.png',
+  'blossom-julho-esporinha-prateado.png',
+  'blossom-agosto-gladiolo-prateado.png',
+  'blossom-setembro-aster-prateado.png',
+  'blossom-outubro-calendula-prateado.png',
+  'blossom-novembro-crisantemo-prateado.png',
+  'blossom-dezembro-azevinho-prateado.png'
+];
+COLLECTIONS.forEach(function(collection){
+  if(collection.key==='blossom'){
+    collection.items.forEach(function(medal,index){medal.imgSilver=BLOSSOM_SILVER_IMAGES[index];});
+  }
+});
+
+// Language-specific photos for the custom pendant in English.
+COLLECTIONS.forEach(function(collection){
+  if(collection.key==='tell-us-your-message'&&collection.items[0]){
+    collection.items[0].imgGold='custom-en-gold.png';
+    collection.items[0].imgSilver='custom-en-silver.png';
+  }
+});
+
+// Adds the missing colour for each of the ten Portuguese-expression pendants.
+var TALK_PORTUGUESE_MISSING_VARIANTS=[
+  {silver:'fala-portugues-caralho-prateado.png'},
+  {gold:'fala-portugues-tira-cavalinho-dourado.png'},
+  {silver:'fala-portugues-volta-bilhar-prateado.png'},
+  {silver:'fala-portugues-pentear-macacos-prateado.png'},
+  {gold:'fala-portugues-ta-bem-abelha-dourado.png'},
+  {silver:'fala-portugues-e-lidar-prateado.png'},
+  {gold:'fala-portugues-vai-ver-se-chove-dourado.png'},
+  {gold:'fala-portugues-estas-aqui-dourado.png'},
+  {gold:'fala-portugues-foda-se-dourado.png'},
+  {silver:'fala-portugues-vai-me-a-loja-prateado.png'}
+];
+COLLECTIONS.forEach(function(collection){
+  if(collection.key==='talk-portuguese-to-me'){
+    collection.items.forEach(function(medal,index){
+      var variant=TALK_PORTUGUESE_MISSING_VARIANTS[index]||{};
+      if(variant.gold)medal.imgGold=variant.gold;
+      if(variant.silver)medal.imgSilver=variant.silver;
+    });
+  }
+});
+
+// Adds the missing colour for each of the seven I Kinda Like You pendants.
+var KINDA_LIKE_YOU_MISSING_VARIANTS=[
+  {silver:'gosto-bocadinho-gosto-prateado.png'},
+  {gold:'gosto-bocadinho-ainda-bem-es-tu-dourado.png'},
+  {silver:'gosto-bocadinho-tu-vales-caos-prateado.png'},
+  {gold:'gosto-bocadinho-ficas-bem-dourado.png'},
+  {silver:'gosto-bocadinho-ainda-bem-apareceste-prateado.png'},
+  {silver:'gosto-bocadinho-contigo-melhor-prateado.png'},
+  {gold:'gosto-bocadinho-tu-fazes-me-bem-dourado.png'}
+];
+COLLECTIONS.forEach(function(collection){
+  if(collection.key==='i-kinda-like-you'){
+    collection.items.forEach(function(medal,index){
+      var variant=KINDA_LIKE_YOU_MISSING_VARIANTS[index]||{};
+      if(variant.gold)medal.imgGold=variant.gold;
+      if(variant.silver)medal.imgSilver=variant.silver;
+    });
+  }
+});
+
+// Adds the missing colour for each of the seven Talk to the Hand pendants.
+var TALK_TO_THE_HAND_MISSING_VARIANTS=[
+  {silver:'fala-mao-rosa-prateado.png'},
+  {gold:'fala-mao-margarida-dourado.png'},
+  {silver:'fala-mao-jasmim-prateado.png'},
+  {gold:'fala-mao-lirio-dourado.png'},
+  {gold:'fala-mao-cravo-dourado.png'},
+  {gold:'fala-mao-amor-perfeito-dourado.png'},
+  {gold:'fala-mao-orquidea-dourado.png'}
+];
+COLLECTIONS.forEach(function(collection){
+  if(collection.key==='talk-to-the-hand'){
+    collection.items.forEach(function(medal,index){
+      var variant=TALK_TO_THE_HAND_MISSING_VARIANTS[index]||{};
+      if(variant.gold)medal.imgGold=variant.gold;
+      if(variant.silver)medal.imgSilver=variant.silver;
+    });
+  }
+});
+
+// Adds the missing colours for all eighteen Loud and Proud pendants.
+var LOUD_AND_PROUD_MISSING_VARIANTS=[
+  {silver:'loud-proud-no-means-no-prateado.png'},
+  {gold:'loud-proud-stop-looking-at-my-boobs-dourado.png'},
+  {silver:'loud-proud-respect-my-space-prateado.png'},
+  {silver:'loud-proud-my-body-my-rules-prateado.png'},
+  {silver:'loud-proud-dont-tell-me-to-smile-prateado.png'},
+  {silver:'loud-proud-not-your-business-prateado.png'},
+  {gold:'loud-proud-i-am-not-your-toy-dourado.png'},
+  {gold:'loud-proud-stay-out-of-my-lane-dourado.png'},
+  {gold:'loud-proud-feminist-af-dourado.png'},
+  {gold:'loud-proud-fuck-you-25mm-dourado.png'},
+  {gold:'loud-proud-dont-touch-this-dourado.png'},
+  {gold:'loud-proud-mind-your-own-damn-business-dourado.png'},
+  {gold:'loud-proud-hands-off-dourado.png'},
+  {silver:'loud-proud-keep-your-opinions-prateado.png'},
+  {silver:'loud-proud-zero-fucks-given-prateado.png'},
+  {silver:'loud-proud-bye-not-sorry-prateado.png'},
+  {gold:'loud-proud-dont-mansplain-me-dourado.png'},
+  {silver:'loud-proud-fuck-you-15mm-prateado.png'}
+];
+COLLECTIONS.forEach(function(collection){
+  if(collection.key==='loud-and-proud'){
+    collection.items.forEach(function(medal,index){
+      var variant=LOUD_AND_PROUD_MISSING_VARIANTS[index]||{};
+      if(variant.gold)medal.imgGold=variant.gold;
+      if(variant.silver)medal.imgSilver=variant.silver;
+    });
+  }
+});
+
 
 // GA4 e-commerce instrumentation. No personal data or custom engraving text is sent.
 function lunaGaEvent(name, params){
@@ -526,10 +670,12 @@ function renderCollection(key){
   main.innerHTML=html;
   var container=document.getElementById('cards');
   col.items.forEach(function(m,i){
-    var hasImg=m.img&&m.img.length>0;
+    var displayImg=m.imgGold||m.img;
+    var hasImg=displayImg&&displayImg.length>0;
     var card=document.createElement('div');
     card.className='card';
-    var imgHtml=hasImg?('<img src="'+m.img+'" alt="pendant" loading="lazy">'):'<div class="card-img-placeholder">'+m.nome+'</div>';
+    card._lunaMedal=m;
+    var imgHtml=hasImg?('<img src="'+displayImg+'" alt="'+m.nome+' pendant in gold" loading="lazy">'):'<div class="card-img-placeholder">'+m.nome+'</div>';
     var precoCard='&euro;'+col.priceFn(m);
     card.innerHTML=
       '<div class="card-img-wrap">'+imgHtml+(m.mm==="personalizado"?'<div class="card-badge-personalizado">&#9733; CUSTOM</div>':'')+'</div>'
@@ -555,6 +701,14 @@ function selectColor(btn){
   var opts=btn.closest('.color-options').querySelectorAll('.color-opt');
   opts.forEach(function(o){o.classList.remove('sel-gold','sel-silver');});
   btn.classList.add(btn.dataset.color==='dourado'?'sel-gold':'sel-silver');
+  var card=btn.closest('.card');
+  var medal=card&&card._lunaMedal;
+  var image=card&&card.querySelector('.card-img-wrap img');
+  if(image&&medal&&(medal.imgGold||medal.imgSilver)){
+    var isGold=btn.dataset.color==='dourado';
+    image.src=isGold?(medal.imgGold||medal.img):(medal.imgSilver||medal.img);
+    image.alt=medal.nome+' pendant in '+(isGold?'gold':'silver');
+  }
 }
 
 function getSelectedColor(idx){
@@ -570,12 +724,13 @@ function addToCart(colKey,idx){
   var col=findCollection(colKey);
   var m=col.items[idx];
   var cor=getSelectedColor(idx);
+  var itemImg=cor==='dourado'?(m.imgGold||m.img):(m.imgSilver||m.img);
   var itemId=colKey+'-'+idx;
   var existing=null;
   for(var i=0;i<cart.length;i++){if(cart[i].id===itemId&&cart[i].cor===cor){existing=cart[i];break;}}
   var previousQty=existing?existing.qty:0;
   if(existing){if(existing.qty<14)existing.qty++;}
-  else{cart.push({id:itemId,colecao:colKey,idx:idx,nome:m.nome,cor:cor,mm:m.mm,img:m.img,qty:1,frase:(m.mm==='personalizado'?(document.getElementById('frase-'+idx)||{value:''}).value.trim().substring(0,25):''),preco:col.priceFn(m)});}
+  else{cart.push({id:itemId,colecao:colKey,idx:idx,nome:m.nome,cor:cor,mm:m.mm,img:itemImg,qty:1,frase:(m.mm==='personalizado'?(document.getElementById('frase-'+idx)||{value:''}).value.trim().substring(0,25):''),preco:col.priceFn(m)});}
   saveCart();
   updateCartBadge();
   if(!existing || existing.qty>previousQty){
