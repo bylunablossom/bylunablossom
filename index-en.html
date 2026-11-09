@@ -189,6 +189,16 @@ footer a{color:var(--gold);text-decoration:none}
   .personalizadas-cards .card-name{min-height:2.4em;}
   .personalizadas-cards .card-desc{min-height:3.2em;}
 }
+
+/* Payment choice after order submission */
+.payment-panel{margin:1.1rem 0;padding:1.1rem;border:1px solid #e8dcef;border-radius:14px;background:#fff;text-align:center}
+.payment-status{color:var(--lavender-deep)!important;font-weight:500;margin:.5rem 0}
+.payment-methods{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin:1rem 0}
+.payment-method{border:1px solid #d9c7e7;border-radius:12px;background:#fbf7fd;padding:.85rem .3rem;cursor:pointer;font:500 .85rem 'Jost',sans-serif;color:var(--dark)}
+.payment-method[aria-pressed="true"]{border:2px solid var(--lavender-deep);background:#f0eaf8}
+.payment-details{padding:1rem;background:#faf6f0;border-radius:10px;line-height:1.65;font-size:.86rem;color:var(--mid);overflow-wrap:anywhere}
+.payment-details[hidden]{display:none}
+.payment-copy{margin:.5rem auto;border:1px solid var(--gold);border-radius:30px;background:white;padding:.5rem .9rem;cursor:pointer;font:500 .75rem 'Jost',sans-serif}
 </style>
 <!-- Meta Pixel -->
 <script>
@@ -294,7 +304,7 @@ gtag('config', 'G-BWWQVHYHL6');
   <div class="steps">
     <div class="step fade-in"><div class="step-num">1</div><div class="step-text"><h4>Choose your pendant</h4><p>Choose the message and color. Add it to your cart and click &ldquo;Complete order&rdquo;.</p></div></div>
     <div class="step fade-in"><div class="step-num">2</div><div class="step-text"><h4>Confirm your order</h4><p>Fill in your contact and delivery details and confirm the order.</p></div></div>
-    <div class="step fade-in"><div class="step-num">3</div><div class="step-text"><h4>Receive payment instructions</h4><p>We'll email you a summary and the details to pay via MB WAY or PayPal. Once payment is confirmed, we start preparing your piece.</p></div></div>
+    <div class="step fade-in"><div class="step-num">3</div><div class="step-text"><h4>Choose how to pay</h4><p>After submitting your order, choose MB WAY or PayPal and see the payment details immediately. We also send the instructions by email. We start preparing your piece after confirming payment.</p></div></div>
     <div class="step fade-in"><div class="step-num">4</div><div class="step-text"><h4>Receive it at home</h4><p>We'll email you once your order has shipped. Worldwide shipping. Carefully packaged with lots of love.</p></div></div>
   </div>
 </section>
@@ -357,15 +367,24 @@ gtag('config', 'G-BWWQVHYHL6');
     </div>
 
     <div class="modal-success" id="stepSuccess" style="display:none">
-      <img src="logo-new.png" alt="by Luna Blossom"
-        style="width:100px;margin:0 auto 0.5rem;display:block;">
-      <h3>Order received!</h3>
-      
-      <p style="margin-top:1rem">You will receive an email with payment details shortly.<br>If you have any questions, contact us on <a href="https://ig.me/m/by_luna_blossom" target="_blank" style="color:var(--gold)">@by_luna_blossom</a></p>
+      <img src="https://bylunablossom.github.io/bylunablossom/logo-new.png" alt="" aria-hidden="true" onerror="this.style.display='none'" style="width:100px;height:auto;margin:0 auto .5rem;display:block;object-fit:contain">
+      <h3>Order registered!</h3>
+      <p class="payment-status">Awaiting payment confirmation</p>
+      <p id="paymentOrderTotal"></p>
+      <div class="payment-panel" style="margin:.7rem 0;padding:.85rem"><p style="font-size:.72rem;letter-spacing:.1em;text-transform:uppercase">Order number</p><strong id="paymentOrderNumber" style="display:block;font-size:1.3rem;letter-spacing:.07em;color:var(--lavender-deep);margin:.3rem 0"></strong><button type="button" class="payment-copy" onclick="copyLunaPayment(document.getElementById('paymentOrderNumber').textContent,this)">Copy reference</button></div>
+      <div class="payment-panel">
+        <p>Choose your preferred payment method:</p>
+        <div class="payment-methods"><button type="button" class="payment-method" id="payMbButton" aria-pressed="false" onclick="chooseLunaPayment('mb')">MB WAY</button><button type="button" class="payment-method" id="payPaypalButton" aria-pressed="false" onclick="chooseLunaPayment('paypal')">PayPal</button></div>
+        <div class="payment-details" id="payMbDetails" hidden><strong>MB WAY</strong><p>Send the exact order amount to:</p><strong>+351 916 633 646</strong><br><button class="payment-copy" type="button" onclick="copyLunaPayment('+351916633646',this)">Copy number</button></div>
+        <div class="payment-details" id="payPaypalDetails" hidden><strong>PayPal</strong><p>Send the exact order amount to:</p><strong>@SofiaMMMelo</strong><br><button class="payment-copy" type="button" onclick="copyLunaPayment('@SofiaMMMelo',this)">Copy PayPal ID</button></div>
+        <p style="margin-top:1rem;font-size:.76rem">Use this number as your payment reference.</p>
+      </div>
+      <p>Order details and payment instructions are also sent by email.<br>Questions? Contact <a href="https://ig.me/m/by_luna_blossom" target="_blank" rel="noopener" style="color:var(--gold)">@by_luna_blossom</a>.</p>
+      <button type="button" class="btn-submit" onclick="closeModal()">I have the payment details</button>
     </div>
   </div>
 </div>
-
+<div id="lunaOrderClosedNotice" role="status" aria-live="polite" style="display:none;position:fixed;z-index:1100;left:1rem;right:1rem;bottom:1rem;max-width:520px;margin:0 auto;padding:1rem 1.25rem;border-radius:14px;background:#fff;border:1px solid #d9c7e7;box-shadow:0 6px 25px rgba(28,21,16,.15);font:400 .85rem/1.6 Jost,sans-serif;color:#1C1510">Thank you for your order! You’ll receive an email confirmation once your payment has been verified. <button type="button" onclick="document.getElementById('lunaOrderClosedNotice').style.display='none'" aria-label="Close" style="float:right;background:none;border:0;font-size:1.2rem;cursor:pointer">×</button></div>
 
 <script>
 var SCRIPT_URL='https://script.google.com/macros/s/AKfycbzQ6SlYGHM5AUY3D7XHu5C97qiBGxGXqg8291DWiAtDWavhzrxNwc7MCHTVBFMLZw2zoQ/exec';
@@ -952,8 +971,10 @@ function goToCheckout(){
 }
 
 function closeModal(){
+  var completed=document.getElementById('modalOverlay').classList.contains('open') && document.getElementById('stepSuccess').style.display==='block';
   document.getElementById('modalOverlay').classList.remove('open');
   document.body.style.overflow='';
+  if(completed)document.getElementById('lunaOrderClosedNotice').style.display='block';
 }
 
 function closeModalOutside(e){
@@ -973,12 +994,39 @@ function validateForm(){
   return ok;
 }
 
+
+function chooseLunaPayment(method){
+  document.getElementById('payMbDetails').hidden=method!=='mb';
+  document.getElementById('payPaypalDetails').hidden=method!=='paypal';
+  document.getElementById('payMbButton').setAttribute('aria-pressed',String(method==='mb'));
+  document.getElementById('payPaypalButton').setAttribute('aria-pressed',String(method==='paypal'));
+}
+function copyLunaPayment(value,button){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(value).then(function(){button.textContent='Copied!';}).catch(function(){window.prompt('Copy:',value);});
+  }else{window.prompt('Copy:',value);}
+}
+
+// Public order identifier: generated locally, without reading the order spreadsheet.
+// The Apps Script must validate uniqueness and use this same identifier in emails.
+var pendingLunaOrderNumber=null;
+function newLunaOrderNumber(){
+  if(!window.crypto||!window.crypto.getRandomValues){throw new Error('Secure random generator unavailable');}
+  var alphabet='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  var bytes=new Uint8Array(10);
+  window.crypto.getRandomValues(bytes);
+  return 'LB-'+Array.from(bytes,function(b){return alphabet[b%alphabet.length];}).join('');
+}
+
 function submitEncomenda(){
   if(!validateForm())return;
   var btn=document.getElementById('btnSubmit');
   btn.disabled=true;btn.textContent='Processing...';
   var pais=document.getElementById('fPais').value;
+  try{if(!pendingLunaOrderNumber)pendingLunaOrderNumber=newLunaOrderNumber();}
+  catch(e){btn.disabled=false;btn.textContent='Confirm Order →';alert('Could not generate a secure order reference. Please try again.');return;}
   var payload={
+    numeroEncomenda:pendingLunaOrderNumber,
     nome:document.getElementById('fNome').value.trim(),
     email:document.getElementById('fEmail').value.trim(),
     telefone:document.getElementById('fTel').value.trim(),
@@ -1007,8 +1055,12 @@ function submitEncomenda(){
   .then(function(){
     btn.disabled=false;btn.textContent='Confirm Order →';
     document.getElementById('stepForm').style.display='none';
+    document.getElementById('paymentOrderNumber').textContent=pendingLunaOrderNumber;
+    pendingLunaOrderNumber=null;
+    document.getElementById('paymentOrderTotal').textContent='Order total: €'+lunaGaTotal().toFixed(2).replace('.',',')+'';
+    chooseLunaPayment(null);
     document.getElementById('stepSuccess').style.display='block';
-    document.getElementById('modalTitle').textContent='Thank you!';
+    document.getElementById('modalTitle').textContent='Payment details';
     cart=[];saveCart();updateCartBadge();
   })
   .catch(function(){
